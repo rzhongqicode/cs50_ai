@@ -1,0 +1,3716 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://cs50.harvard.edu/ai/notes/0/#artificial-intelligence -->
+<html lang="en-us" data-darkreader-proxy-injected="true" class="wf-ptsans-n4-active wf-ptsans-n7-active wf-active"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        
+        <meta name="viewport" content="initial-scale=1, width=device-width"><meta property="og:description" content="This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation. Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification, optimization, machine learning, large language models, and other topics in artificial intelligence as they incorporate them into their own Python programs. By course&#39;s end, students emerge with experience in libraries for machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent systems of their own.">
+
+        <meta property="og:image" content="https://img.youtube.com/vi/qK46ET1xk2A/maxresdefault.jpg"><meta property="og:title" content="Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python">
+
+        <link href="https://cs50.harvard.edu/ai/favicon.ico?1756231558" rel="icon">
+
+        <!-- https://fonts.google.com/specimen/PT+Sans?query=PT+Sans&selection.family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700 -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/webfont.js"></script>
+
+        <!-- https://getbootstrap.com/docs/ -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/jquery.min.js"></script>
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/bootstrap.bundle.min.js"></script>
+
+        <!-- https://bootstrap-table.com/docs/getting-started/introduction/ -->
+        <link href="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/bootstrap-table.min.css" rel="stylesheet">
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/bootstrap-table.min.js"></script>
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/bootstrap-table-mobile.min.js"></script>
+
+        <!-- https://fontawesome.com/how-to-use/on-the-web/referencing-icons/basic-use -->
+        
+        <link crossorigin="anonymous" href="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/a6e66aa089.css" rel="stylesheet">
+        
+
+        <!-- https://moment.github.io/luxon/ -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/luxon.min.js"></script>
+
+        <!-- http://docs.mathjax.org/ -->
+        <!-- http://docs.mathjax.org/en/latest/options/output/chtml.html?highlight=displayAlign#the-configuration-block -->
+        <!-- https://docs.mathjax.org/en/latest/output/fonts.html -->
+        <script>
+            MathJax = {
+                loader: {
+                    paths: {
+                        'mathjax-newcm': '[mathjax]/../@mathjax/mathjax-newcm-font',
+                    }
+                },
+                output: {
+                    displayAlign: 'left'
+                }
+            };
+        </script>
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/tex-mml-chtml.js"></script><style>.MJX_LiveRegion {
+  position: absolute;
+  top: 0;
+  display: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  opacity: 1;
+  z-index: 202;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0px 5px 20px #888;
+  border: 2px solid #CCCCCC;
+}
+
+.MJX_LiveRegion_Show {
+  display: block;
+}</style><style>.MJX_LiveRegion {
+  position: absolute;
+  top: 0;
+  display: none;
+  width: auto;
+  height: auto;
+  padding: 0;
+  opacity: 1;
+  z-index: 202;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 0px 5px 20px #888;
+  border: 2px solid #CCCCCC;
+}
+
+.MJX_LiveRegion_Show {
+  display: block;
+}</style><style>.MJX_HoverRegion {
+  display: block;
+  position: absolute;
+  width: max-content;
+  height: auto;
+  padding: 0;
+  opacity: 1;
+  z-index: 202;
+  margin: 0 auto;
+  background-color: white;
+  line-height: 0;
+  box-shadow: 0px 10px 20px #888;
+  border: 2px solid #CCCCCC;
+}
+
+.MJX_HoverRegion > div {
+  overflow: hidden;
+}</style><style>.MJX_ToolTip {
+  width: auto;
+  height: auto;
+  opacity: 1;
+  text-align: center;
+  border-radius: 4px;
+  padding: 0;
+  border-bottom: 1px dotted black;
+  position: absolute;
+  display: inline-block;
+  background-color: white;
+  z-index: 202;
+}
+
+.MJX_ToolTip > div {
+  border-radius: inherit;
+  padding: 0 2px;
+}</style><style type="text/css">.CtxtMenu_InfoClose {  top:.2em; right:.2em;}
+.CtxtMenu_InfoContent {  overflow:auto; text-align:left; font-size:80%;  padding:.4em .6em; border:1px inset; margin:1em 0px;  max-height:20em; max-width:30em; background-color:#EEEEEE;  white-space:normal;}
+.CtxtMenu_Info.CtxtMenu_MousePost {outline:none;}
+.CtxtMenu_Info {  position:fixed; left:50%; width:auto; text-align:center;  border:3px outset; padding:1em 2em; background-color:#DDDDDD;  color:black;  cursor:default; font-family:message-box; font-size:120%;  font-style:normal; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 15px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius:15px;               /* Safari and Chrome */  -moz-border-radius:15px;                  /* Firefox */  -khtml-border-radius:15px;                /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */  filter:progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color="gray", Positive="true"); /* IE */}
+</style><style type="text/css">.CtxtMenu_MenuClose {  position:absolute;  cursor:pointer;  display:inline-block;  border:2px solid #AAA;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  font-family: "Courier New", Courier;  font-size:24px;  color:#F0F0F0}
+.CtxtMenu_MenuClose span {  display:block; background-color:#AAA; border:1.5px solid;  border-radius:18px;  -webkit-border-radius: 18px;             /* Safari and Chrome */  -moz-border-radius: 18px;                /* Firefox */  -khtml-border-radius: 18px;              /* Konqueror */  line-height:0;  padding:8px 0 6px     /* may need to be browser-specific */}
+.CtxtMenu_MenuClose:hover {  color:white!important;  border:2px solid #CCC!important}
+.CtxtMenu_MenuClose:hover span {  background-color:#CCC!important}
+.CtxtMenu_MenuClose:hover:focus {  outline:none}
+</style><style type="text/css">.CtxtMenu_Menu {  position:absolute;  background-color:white;  color:black;  width:auto; padding:5px 0px;  border:1px solid #CCCCCC; margin:0; cursor:default;  font: menu; text-align:left; text-indent:0; text-transform:none;  line-height:normal; letter-spacing:normal; word-spacing:normal;  word-wrap:normal; white-space:nowrap; float:none; z-index:201;  border-radius: 5px;                     /* Opera 10.5 and IE9 */  -webkit-border-radius: 5px;             /* Safari and Chrome */  -moz-border-radius: 5px;                /* Firefox */  -khtml-border-radius: 5px;              /* Konqueror */  box-shadow:0px 10px 20px #808080;         /* Opera 10.5 and IE9 */  -webkit-box-shadow:0px 10px 20px #808080; /* Safari 3 & Chrome */  -moz-box-shadow:0px 10px 20px #808080;    /* Forefox 3.5 */  -khtml-box-shadow:0px 10px 20px #808080;  /* Konqueror */}
+.CtxtMenu_MenuItem {  padding: 1px 2em;  background:transparent;}
+.CtxtMenu_MenuArrow {  position:absolute; right:.5em; padding-top:.25em; color:#666666;  font-family: null; font-size: .75em}
+.CtxtMenu_MenuActive .CtxtMenu_MenuArrow {color:white}
+.CtxtMenu_MenuArrow.CtxtMenu_RTL {left:.5em; right:auto}
+.CtxtMenu_MenuCheck {  position:absolute; left:.7em;  font-family: null}
+.CtxtMenu_MenuCheck.CtxtMenu_RTL { right:.7em; left:auto }
+.CtxtMenu_MenuRadioCheck {  position:absolute; left: .7em;}
+.CtxtMenu_MenuRadioCheck.CtxtMenu_RTL {  right: .7em; left:auto}
+.CtxtMenu_MenuInputBox {  padding-left: 1em; right:.5em; color:#666666;  font-family: null;}
+.CtxtMenu_MenuInputBox.CtxtMenu_RTL {  left: .1em;}
+.CtxtMenu_MenuComboBox {  left:.1em; padding-bottom:.5em;}
+.CtxtMenu_MenuSlider {  left: .1em;}
+.CtxtMenu_SliderValue {  position:absolute; right:.1em; padding-top:.25em; color:#333333;  font-size: .75em}
+.CtxtMenu_SliderBar {  outline: none; background: #d3d3d3}
+.CtxtMenu_MenuLabel {  padding: 1px 2em 3px 1.33em;  font-style:italic}
+.CtxtMenu_MenuRule {  border-top: 1px solid #DDDDDD;  margin: 4px 3px;}
+.CtxtMenu_MenuDisabled {  color:GrayText}
+.CtxtMenu_MenuActive {  background-color: #606872;  color: white;}
+.CtxtMenu_MenuDisabled:focus {  background-color: #E8E8E8}
+.CtxtMenu_MenuLabel:focus {  background-color: #E8E8E8}
+.CtxtMenu_ContextMenu:focus {  outline:none}
+.CtxtMenu_ContextMenu .CtxtMenu_MenuItem:focus {  outline:none}
+.CtxtMenu_SelectionMenu {  position:relative; float:left;  border-bottom: none; -webkit-box-shadow:none; -webkit-border-radius:0px; }
+.CtxtMenu_SelectionItem {  padding-right: 1em;}
+.CtxtMenu_Selection {  right: 40%; width:50%; }
+.CtxtMenu_SelectionBox {  padding: 0em; max-height:20em; max-width: none;  background-color:#FFFFFF;}
+.CtxtMenu_SelectionDivider {  clear: both; border-top: 2px solid #000000;}
+.CtxtMenu_Menu .CtxtMenu_MenuClose {  top:-10px; left:-10px}
+</style>
+
+        <!-- https://github.com/verlok/vanilla-lazyload -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/intersection-observer.js"></script>
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/lazyload.min.js"></script>
+
+        <!-- https://github.com/davidjbradshaw/iframe-resizer -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/iframeResizer.min.js"></script>
+
+        <!-- https://github.com/scratchblocks/scratchblocks/releases -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/scratchblocks.min.js"></script><style>.sb-label{font-family:Lucida Grande,Verdana,Arial,DejaVu Sans,sans-serif;font-weight:700;fill:#fff;font-size:10px;word-spacing:1px}.sb-obsolete{fill:#d42828}.sb-motion{fill:#4a6cd4}.sb-looks{fill:#8a55d7}.sb-sound{fill:#bb42c3}.sb-pen{fill:#0e9a6c}.sb-events{fill:#c88330}.sb-control{fill:#e1a91a}.sb-sensing{fill:#2ca5e2}.sb-operators{fill:#5cb712}.sb-variables{fill:#ee7d16}.sb-list{fill:#cc5b22}.sb-custom{fill:#632d99}.sb-custom-arg{fill:#5947b1}.sb-extension{fill:#4b4a60}.sb-grey{fill:#969696}.sb-bevel{filter:url(#bevelFilter)}.sb-input{filter:url(#inputBevelFilter)}.sb-input-number,.sb-input-number-dropdown,.sb-input-string{fill:#fff}.sb-literal-dropdown,.sb-literal-number,.sb-literal-number-dropdown,.sb-literal-string{font-weight:400;font-size:9px;word-spacing:0}.sb-literal-number,.sb-literal-number-dropdown,.sb-literal-string{fill:#000}.sb-darker{filter:url(#inputDarkFilter)}.sb-outline{stroke:#fff;stroke-opacity:.2;stroke-width:2;fill:none}.sb-comment,.sb-define-hat-cap{stroke:#632d99;stroke-width:1;fill:#8e2ec2}.sb-comment{fill:#ffffa5;stroke:#d0d1d2}.sb-comment-line{fill:#ffff80}.sb-comment-label{font-family:Helvetica,Arial,DejaVu Sans,sans-serif;font-weight:700;fill:#5c5d5f;word-spacing:0;font-size:12px}.sb-diff{fill:none;stroke:#000}.sb-diff-ins{stroke-width:2px}.sb-diff-del{stroke-width:3px}</style><style>.sb3-label{font:500 12pt Helvetica Neue,Helvetica,sans-serif;word-spacing:1pt}.sb3-literal-dropdown,.sb3-literal-number,.sb3-literal-number-dropdown,.sb3-literal-string{word-spacing:0}.sb3-diff{fill:none;stroke:#000}.sb3-diff-ins{stroke-width:2px}.sb3-diff-del{stroke-width:3px}svg .sb3-motion{fill:#4c97ff;stroke:#3373cc}svg .sb3-motion-alt{fill:#4280d7}svg .sb3-motion-dark{fill:#3373cc}svg .sb3-looks{fill:#96f;stroke:#774dcb}svg .sb3-looks-alt{fill:#855cd6}svg .sb3-looks-dark{fill:#774dcb}svg .sb3-sound{fill:#cf63cf;stroke:#bd42bd}svg .sb3-sound-alt{fill:#c94fc9}svg .sb3-sound-dark{fill:#bd42bd}svg .sb3-control{fill:#ffab19;stroke:#cf8b17}svg .sb3-control-alt{fill:#ec9c13}svg .sb3-control-dark{fill:#cf8b17}svg .sb3-events{fill:#ffbf00;stroke:#c90}svg .sb3-events-alt{fill:#e6ac00}svg .sb3-events-dark{fill:#c90}svg .sb3-sensing{fill:#5cb1d6;stroke:#2e8eb8}svg .sb3-sensing-alt{fill:#47a8d1}svg .sb3-sensing-dark{fill:#2e8eb8}svg .sb3-operators{fill:#59c059;stroke:#389438}svg .sb3-operators-alt{fill:#46b946}svg .sb3-operators-dark{fill:#389438}svg .sb3-variables{fill:#ff8c1a;stroke:#db6e00}svg .sb3-variables-alt{fill:#ff8000}svg .sb3-variables-dark{fill:#db6e00}svg .sb3-list{fill:#ff661a;stroke:#e64d00}svg .sb3-list-alt{fill:#f50}svg .sb3-list-dark{fill:#e64d00}svg .sb3-custom{fill:#ff6680;stroke:#f35}svg .sb3-custom-alt{fill:#ff4d6a}svg .sb3-custom-dark{fill:#f35}svg .sb3-extension{fill:#0fbd8c;stroke:#0b8e69}svg .sb3-extension-alt{fill:#0da57a}svg .sb3-extension-dark{fill:#0b8e69}svg .sb3-obsolete{fill:#ed4242;stroke:#ca2b2b}svg .sb3-obsolete-alt{fill:#db3333}svg .sb3-obsolete-dark{fill:#ca2b2b}svg .sb3-grey{fill:#bfbfbf;stroke:#909090}svg .sb3-grey-alt{fill:#b2b2b2}svg .sb3-grey-dark{fill:#909090}svg .sb3-label{fill:#fff}svg .sb3-input-color{stroke:#fff}svg .sb3-input-number,svg .sb3-input-string{fill:#fff}svg .sb3-literal-number,svg .sb3-literal-string{fill:#575e75}svg .sb3-custom-arg{fill:#ff6680;stroke:#f35}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion{fill:#80b5ff;stroke:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-alt{fill:#b3d2ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-motion-dark{fill:#3373cc}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks{fill:#ccb3ff;stroke:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-alt{fill:#dcf}svg.scratchblocks-style-scratch3-high-contrast .sb3-looks-dark{fill:#774dcb}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound{fill:#e19de1;stroke:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-alt{fill:#ffb3ff}svg.scratchblocks-style-scratch3-high-contrast .sb3-sound-dark{fill:#bd42bd}svg.scratchblocks-style-scratch3-high-contrast .sb3-control{fill:#ffbe4c;stroke:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-alt{fill:#ffda99}svg.scratchblocks-style-scratch3-high-contrast .sb3-control-dark{fill:#cf8b17}svg.scratchblocks-style-scratch3-high-contrast .sb3-events{fill:#ffd966;stroke:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-alt{fill:#ffecb3}svg.scratchblocks-style-scratch3-high-contrast .sb3-events-dark{fill:#c90}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing{fill:#85c4e0;stroke:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-alt{fill:#aed8ea}svg.scratchblocks-style-scratch3-high-contrast .sb3-sensing-dark{fill:#2e8eb8}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators{fill:#7ece7e;stroke:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-alt{fill:#b5e3b5}svg.scratchblocks-style-scratch3-high-contrast .sb3-operators-dark{fill:#389438}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables{fill:#ffa54c;stroke:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-alt{fill:#fc9}svg.scratchblocks-style-scratch3-high-contrast .sb3-variables-dark{fill:#db6e00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list{fill:#f96;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-alt{fill:#ffcab0}svg.scratchblocks-style-scratch3-high-contrast .sb3-list-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom{fill:#f9a;stroke:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-alt{fill:#ffccd5}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-dark{fill:#e64d00}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension{fill:#13ecaf;stroke:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-alt{fill:#75f0cd}svg.scratchblocks-style-scratch3-high-contrast .sb3-extension-dark{fill:#0b8e69}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete{fill:#fc6666;stroke:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-alt{fill:#fcb0b0}svg.scratchblocks-style-scratch3-high-contrast .sb3-obsolete-dark{fill:#d32121}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey{fill:#bfbfbf;stroke:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-alt{fill:#b2b2b2}svg.scratchblocks-style-scratch3-high-contrast .sb3-grey-dark{fill:#959595}svg.scratchblocks-style-scratch3-high-contrast .sb3-label{fill:#000}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-color{stroke:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-input-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-input-string{fill:#fff}svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-number,svg.scratchblocks-style-scratch3-high-contrast .sb3-literal-string{fill:#000}svg.scratchblocks-style-scratch3-high-contrast .sb3-custom-arg{fill:#f9a;stroke:#e64d00}.sb3-comment{fill:#ffffa5;stroke:#d0d1d2;stroke-width:1}.sb3-comment-line{fill:#ffff80}.sb3-comment-label,.sb3-label.sb3-comment-label{font:400 12pt Helvetica Neue,Helvetica,sans-serif;fill:#000;word-spacing:0}</style>
+
+        <!-- https://mermaid-js.github.io/ -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/mermaid.min.js"></script>
+
+        <!-- https://github.com/twitter/twemoji -->
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/twemoji.min.js"></script>
+
+        
+
+        <link href="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/page.css" rel="stylesheet">
+        <link rel="stylesheet" href="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/css" media="all"><script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/jekyll-theme-cs50.js"></script>
+
+        <script>
+            window.CS50 = {
+                local: {"day":"numeric","hour":"numeric","minute":"numeric","month":"long","timeZoneName":"short","weekday":"long","year":"numeric"},
+                locale: "en",
+                tz: "Etc/Zulu"
+            };
+        </script>
+
+        <title>Lecture 0 - CS50's Introduction to Artificial Intelligence with Python</title>
+
+
+    <style id="MJX-CHTML-styles">
+mjx-container[overflow="scroll"][display] {
+  overflow: auto clip;
+  min-width: initial !important;
+}
+
+mjx-container[overflow="truncate"][display] {
+  overflow: hidden clip;
+  min-width: initial !important;
+}
+
+mjx-container[display] {
+  display: block;
+  text-align: center;
+  justify-content: center;
+  margin: calc(1em - 2px) 0;
+  padding: 2px 0;
+}
+
+mjx-container[display][width="full"] {
+  display: flex;
+}
+
+mjx-container[justify="left"] {
+  text-align: left;
+  justify-content: left;
+}
+
+mjx-container[justify="right"] {
+  text-align: right;
+  justify-content: right;
+}
+
+mjx-container[jax="CHTML"] {
+  white-space: nowrap;
+}
+
+mjx-mo > mjx-c, mjx-mi > mjx-c, mjx-mn > mjx-c, mjx-ms > mjx-c, mjx-mtext > mjx-c {
+  clip-path: padding-box xywh(-1em -2px calc(100% + 2em) calc(100% + 4px));
+}
+
+mjx-stretchy-h {
+  clip-path: padding-box xywh(0 -2px 100% calc(100% + 4px));
+}
+
+mjx-stretchy-v {
+  clip-path: padding-box xywh(-2px 0 calc(100% + 4px) 100%);
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-container [inline-breaks] {
+  display: inline;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-container[has-speech="true"] {
+  position: relative;
+  cursor: default;
+}
+
+mjx-speech {
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+mjx-speech:focus {
+  outline: none;
+}
+
+mjx-container .mjx-selected {
+  outline: 2px solid black;
+}
+
+mjx-container > mjx-help {
+  display: none;
+  position: absolute;
+  top: -.33em;
+  right: -.5em;
+  width: .6em;
+  height: .6em;
+  cursor: pointer;
+}
+
+mjx-container[display="true"] > mjx-help {
+  right: 0;
+}
+
+mjx-help > svg {
+  stroke: black;
+  width: 100%;
+  height: 100%;
+}
+
+mjx-help > svg > circle {
+  stroke-width: 1.5px;
+  cx: 9px;
+  cy: 9px;
+  r: 9px;
+  fill: white;
+}
+
+mjx-help > svg > circle:nth-child(2) {
+  fill: rgba(0, 0, 255, 0.2);
+  r: 7px;
+}
+
+mjx-help > svg > line {
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+}
+
+mjx-help:hover > svg > circle:nth-child(2) {
+  fill: white;
+}
+
+mjx-container.mjx-explorer-active > mjx-help {
+  display: inline-flex;
+  align-items: center;
+}
+
+mjx-help-sizer {
+  position: fixed;
+  width: 40%;
+  max-width: 30em;
+  top: 3em;
+  left: 50%;
+}
+
+mjx-help-dialog {
+  position: absolute;
+  width: 200%;
+  left: -100%;
+  border: 3px outset;
+  border-radius: 15px;
+  color: black;
+  background-color: #DDDDDD;
+  z-index: 301;
+  text-align: right;
+  font-style: normal;
+  text-indent: 0;
+  text-transform: none;
+  line-height: normal;
+  letter-spacing: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+  float: none;
+  box-shadow: 0px 10px 20px #808080;
+  outline: none;
+}
+
+mjx-help-dialog > h1 {
+  font-size: 24px;
+  text-align: center;
+  margin: .5em 0;
+}
+
+mjx-help-dialog > div {
+  margin: 0 1em;
+  padding: 3px;
+  overflow: auto;
+  height: 20em;
+  border: 2px inset black;
+  background-color: white;
+  text-align: left;
+}
+
+mjx-help-dialog > input {
+  margin: .5em 2em;
+}
+
+mjx-help-dialog kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1.5px #c6cbd1;
+  border-bottom-color: #959da5;
+  border-radius: 3px;
+  box-shadow: inset -.5px -1px 0 #959da5;
+}
+
+mjx-help-dialog ul {
+  list-style-type: none;
+}
+
+mjx-help-dialog li {
+  margin-bottom: .5em;
+}
+
+mjx-help-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+mjx-container[jax="CHTML"] > mjx-math.NCM-N[breakable] > * {
+  font-family: MJX-NCM-ZERO, MJX-NCM-N;
+}
+
+.NCM-N {
+  font-family: MJX-NCM-ZERO, MJX-NCM-N;
+}
+
+.NCM-B {
+  font-family: MJX-NCM-ZERO, MJX-NCM-B;
+}
+
+.NCM-I {
+  font-family: MJX-NCM-ZERO, MJX-NCM-I;
+}
+
+.NCM-BI {
+  font-family: MJX-NCM-ZERO, MJX-NCM-BI;
+}
+
+.NCM-DS {
+  font-family: MJX-NCM-ZERO, MJX-NCM-DS;
+}
+
+.NCM-F {
+  font-family: MJX-NCM-ZERO, MJX-NCM-F;
+}
+
+.NCM-FB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-FB;
+}
+
+.NCM-SS {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SS;
+}
+
+.NCM-SSB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SSB;
+}
+
+.NCM-SSI {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SSI;
+}
+
+.NCM-SSBI {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SSBI;
+}
+
+.NCM-M {
+  font-family: MJX-NCM-ZERO, MJX-NCM-M;
+}
+
+.NCM-SO {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SO;
+}
+
+.NCM-LO {
+  font-family: MJX-NCM-ZERO, MJX-NCM-LO;
+}
+
+.NCM-S3 {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S3;
+}
+
+.NCM-S4 {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S4;
+}
+
+.NCM-S5 {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S5;
+}
+
+.NCM-S6 {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S6;
+}
+
+.NCM-S7 {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S7;
+}
+
+.NCM-MI {
+  font-family: MJX-NCM-ZERO, MJX-NCM-MI;
+}
+
+.NCM-C {
+  font-family: MJX-NCM-ZERO, MJX-NCM-C;
+}
+
+.NCM-CB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-CB;
+}
+
+.NCM-OS {
+  font-family: MJX-NCM-ZERO, MJX-NCM-OS;
+}
+
+.NCM-OB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-OB;
+}
+
+.NCM-V {
+  font-family: MJX-NCM-ZERO, MJX-NCM-V;
+}
+
+.NCM-LT {
+  font-family: MJX-NCM-ZERO, MJX-NCM-LT;
+}
+
+.NCM-RB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-RB;
+}
+
+.NCM-EM {
+  font-family: MJX-NCM-ZERO, MJX-NCM-EM;
+}
+
+.NCM-Be {
+  font-family: MJX-NCM-ZERO, MJX-NCM-Be;
+}
+
+.NCM-U {
+  font-family: MJX-NCM-ZERO, MJX-NCM-U;
+}
+
+.NCM-Ue {
+  font-family: MJX-NCM-ZERO, MJX-NCM-Ue;
+}
+
+.NCM-S {
+  font-family: MJX-NCM-ZERO, MJX-NCM-S;
+}
+
+.NCM-SB {
+  font-family: MJX-NCM-ZERO, MJX-NCM-SB;
+}
+
+@font-face /* MJX-NCM-ZERO */ {
+  font-family: MJX-NCM-ZERO;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-zero.woff2") format("woff2");
+}
+
+@font-face /* MJX-BRK */ {
+  font-family: MJX-BRK;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-brk.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-N */ {
+  font-family: MJX-NCM-N;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-n.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-B */ {
+  font-family: MJX-NCM-B;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-b.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-I */ {
+  font-family: MJX-NCM-I;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-i.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-BI */ {
+  font-family: MJX-NCM-BI;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-bi.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-DS */ {
+  font-family: MJX-NCM-DS;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ds.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-F */ {
+  font-family: MJX-NCM-F;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-f.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-FB */ {
+  font-family: MJX-NCM-FB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-fb.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SS */ {
+  font-family: MJX-NCM-SS;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ss.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SSB */ {
+  font-family: MJX-NCM-SSB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ssb.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SSI */ {
+  font-family: MJX-NCM-SSI;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ssi.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SSBI */ {
+  font-family: MJX-NCM-SSBI;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ssbi.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-M */ {
+  font-family: MJX-NCM-M;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-m.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SO */ {
+  font-family: MJX-NCM-SO;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-so.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-LO */ {
+  font-family: MJX-NCM-LO;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-lo.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S3 */ {
+  font-family: MJX-NCM-S3;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s3.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S4 */ {
+  font-family: MJX-NCM-S4;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s4.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S5 */ {
+  font-family: MJX-NCM-S5;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s5.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S6 */ {
+  font-family: MJX-NCM-S6;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s6.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S7 */ {
+  font-family: MJX-NCM-S7;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s7.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-MI */ {
+  font-family: MJX-NCM-MI;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-mi.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-C */ {
+  font-family: MJX-NCM-C;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-c.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-CB */ {
+  font-family: MJX-NCM-CB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-cb.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-OS */ {
+  font-family: MJX-NCM-OS;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-os.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-OB */ {
+  font-family: MJX-NCM-OB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ob.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-V */ {
+  font-family: MJX-NCM-V;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-v.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-LT */ {
+  font-family: MJX-NCM-LT;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-lt.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-RB */ {
+  font-family: MJX-NCM-RB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-rb.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-EM */ {
+  font-family: MJX-NCM-EM;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-em.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-Be */ {
+  font-family: MJX-NCM-Be;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-be.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-U */ {
+  font-family: MJX-NCM-U;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-u.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-Ue */ {
+  font-family: MJX-NCM-Ue;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-ue.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-S */ {
+  font-family: MJX-NCM-S;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-s.woff2") format("woff2");
+}
+
+@font-face /* MJX-NCM-SB */ {
+  font-family: MJX-NCM-SB;
+  src: url("https://cs50.harvard.edu/ai/assets/mathjax/../@mathjax/mathjax-newcm-font/chtml/woff2/mjx-ncm-sb.woff2") format("woff2");
+}
+</style><style>@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdh18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdo18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdg18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdv18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdj18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdi18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSds18S0xR41.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidh18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkido18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidg18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidv18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidj18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidi18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkids18S0xR41.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7qsDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7jsDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7rsDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7ksDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7osDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7psDJB9cme_xc.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7nsDJB9cme.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdh18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdo18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdg18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdv18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdj18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdi18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCds18S0xR41.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdh18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdo18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdg18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdv18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdj18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdi18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSds18S0xR41.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydh18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydo18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydg18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydv18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydj18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydi18S0xR41YDw.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklyds18S0xR41.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmhdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wkxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmRdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdu3cOWxw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmhdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwkxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmRdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNK7lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qO67lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qN67lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lujVj9_mf.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmhdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwkxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmRdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdu3cOWxw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmhdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwkxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmRdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdu3cOWxw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmhdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwkxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmxdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmBdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmRdu3cOWxy40.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlxdu3cOWxw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+.ZD1LzV_5hhnbdBzBCTeC {
+z-index: 65536;
+}
+
+.BBAoAg1q8YTH2NGsa7Ui {
+font-family: 'Source Sans Pro'
+}
+
+@keyframes aqjkdtZawN5lryW5flKx {
+  from {
+    transform:rotate(0deg)
+  }
+  to {
+    transform:rotate(360deg)
+  }
+}
+
+.qEYyC4J5veWyiLaz9gNP {
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0);
+  vertical-align: baseline;
+  margin-bottom: 5.58px;
+  padding: 3px 18px;
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #646363;
+  background-color: #fff;
+  box-shadow: 0 0 0 1px transparent;
+  color: #000;
+  transition: box-shadow ease-in-out .1s,background-color ease-in-out .1s;
+}
+
+.qEYyC4J5veWyiLaz9gNP svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+
+.qEYyC4J5veWyiLaz9gNP svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#666
+}
+
+
+.qEYyC4J5veWyiLaz9gNP svg circle.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP svg path.iy0BC5jhx6jMyzcvrLwf{
+  fill:transparent;
+  stroke:#666
+}
+
+.qEYyC4J5veWyiLaz9gNP:last-child {
+  margin-right:0
+}
+
+.qEYyC4J5veWyiLaz9gNP svg {
+  min-width:1em;
+  margin-left:.2rem;
+  margin-right:.2rem
+}
+
+.qEYyC4J5veWyiLaz9gNP:hover,
+.qEYyC4J5veWyiLaz9gNP:focus,
+.qEYyC4J5veWyiLaz9gNP:focus-within,
+.qEYyC4J5veWyiLaz9gNP:active {
+  outline:none;
+  text-decoration:none;
+  color:#000;
+  background-color:#f7f7f7;
+  box-shadow:0 0 0 1px #5e34be;
+  text-decoration:none
+}
+
+.qEYyC4J5veWyiLaz9gNP:hover svg,
+.qEYyC4J5veWyiLaz9gNP:focus svg,
+.qEYyC4J5veWyiLaz9gNP:focus-within svg,
+.qEYyC4J5veWyiLaz9gNP:active svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+
+.qEYyC4J5veWyiLaz9gNP:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.qEYyC4J5veWyiLaz9gNP:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.qEYyC4J5veWyiLaz9gNP:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.qEYyC4J5veWyiLaz9gNP:active svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#000
+}
+
+.qEYyC4J5veWyiLaz9gNP:hover svg circle.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:hover svg path.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:focus svg circle.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:focus svg path.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:active svg circle.iy0BC5jhx6jMyzcvrLwf,
+.qEYyC4J5veWyiLaz9gNP:active svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#000
+}
+
+.qEYyC4J5veWyiLaz9gNP:disabled {
+  cursor:not-allowed;
+  opacity:.8;
+  background-color:#fff;
+  box-shadow:0 0 0 1px transparent
+}
+
+.qEYyC4J5veWyiLaz9gNP+button,
+.qEYyC4J5veWyiLaz9gNP+.qEYyC4J5veWyiLaz9gNP {
+  margin-left:5.58px
+}
+.htXPkXdMWWcmr0_dul7A {
+  padding:0;
+  background-color:transparent;
+  border:0;
+  box-shadow:none;
+  color:#000
+}
+.htXPkXdMWWcmr0_dul7A:hover,
+.htXPkXdMWWcmr0_dul7A:focus,
+.htXPkXdMWWcmr0_dul7A:focus-within,
+.htXPkXdMWWcmr0_dul7A:active {
+  background-color:transparent;
+  border:0;
+  box-shadow:none;
+  color:#000;
+  text-decoration:underline
+}
+.htXPkXdMWWcmr0_dul7A:disabled {
+  text-decoration:none
+}
+.MvZ5MuRzqsBeDt5z0X1e svg {
+  margin-top: -5px;
+  margin-right:.75rem;
+  animation-name:aqjkdtZawN5lryW5flKx;
+  animation-duration:3s;
+  animation-iteration-count:infinite;
+  animation-timing-function:linear;
+  transform-origin:50% 50%
+}
+.MvZ5MuRzqsBeDt5z0X1e.Tz2rVjh6IjVdduJP08Qm svg use {
+  stroke:#fff
+}
+.ZChY5ShGlfvLluUVYdtA {
+  padding:9px 36px;
+  font-size:21.6px;
+  font-size:1.2rem
+}
+.L7kF1ZLpIeOYvvHdD7Dg {
+  padding:3.5px 7px;
+  font-size:14.4px;
+  font-size:.8rem
+}
+.c8FhE1WPTbl4j6Blh_Cw {
+  width:100%;
+  margin-left:0 !important
+}
+.Tz2rVjh6IjVdduJP08Qm {
+  border:0;
+  font-weight:300;
+  background-color:#5E33BF;
+  border:1px solid #5e34be;
+  box-shadow:0 0 0 1px transparent;
+  color:#fff
+}
+.Tz2rVjh6IjVdduJP08Qm svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+.Tz2rVjh6IjVdduJP08Qm svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#fff
+}
+.Tz2rVjh6IjVdduJP08Qm svg circle.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#fff
+}
+.Tz2rVjh6IjVdduJP08Qm:hover,
+.Tz2rVjh6IjVdduJP08Qm:focus,
+.Tz2rVjh6IjVdduJP08Qm:focus-within,
+.Tz2rVjh6IjVdduJP08Qm:active {
+  color:#fff;
+  background-color:#6b40cc;
+  box-shadow:0 0 0 1px #5e34be
+}
+.Tz2rVjh6IjVdduJP08Qm:hover svg,
+.Tz2rVjh6IjVdduJP08Qm:focus svg,
+.Tz2rVjh6IjVdduJP08Qm:focus-within svg,
+.Tz2rVjh6IjVdduJP08Qm:active svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+.Tz2rVjh6IjVdduJP08Qm:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.Tz2rVjh6IjVdduJP08Qm:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.Tz2rVjh6IjVdduJP08Qm:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.Tz2rVjh6IjVdduJP08Qm:active svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#fff
+}
+.Tz2rVjh6IjVdduJP08Qm:hover svg circle.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:hover svg path.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:focus svg circle.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:focus svg path.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:active svg circle.iy0BC5jhx6jMyzcvrLwf,
+.Tz2rVjh6IjVdduJP08Qm:active svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#fff
+}
+.Tz2rVjh6IjVdduJP08Qm:disabled {
+  background-color:#5E33BF;
+  box-shadow:0 0 0 1px transparent;
+  color:#fff
+}
+.K29Do4qZAslPSEk0asSZ {
+  min-height:auto;
+  width:1.75em;
+  height:1.75em;
+  margin:0 .5rem 0 0;
+  padding:0;
+  border:1px solid transparent;
+  border-radius:50%;
+  background-color:transparent;
+  box-shadow:none
+}
+.K29Do4qZAslPSEk0asSZ svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+.K29Do4qZAslPSEk0asSZ svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#666
+}
+.K29Do4qZAslPSEk0asSZ svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#666
+}
+.K29Do4qZAslPSEk0asSZ:hover svg,
+.K29Do4qZAslPSEk0asSZ:focus svg,
+.K29Do4qZAslPSEk0asSZ:focus-within svg,
+.K29Do4qZAslPSEk0asSZ:active svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+.K29Do4qZAslPSEk0asSZ:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.K29Do4qZAslPSEk0asSZ:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.K29Do4qZAslPSEk0asSZ:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),
+.K29Do4qZAslPSEk0asSZ:active svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#5e34be
+}
+.K29Do4qZAslPSEk0asSZ:hover svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:hover svg path.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:focus svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:focus svg path.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:active svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ:active svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#5e34be
+}
+.K29Do4qZAslPSEk0asSZ:disabled {
+  opacity:1;
+  background-color:#fff;
+  box-shadow:none
+}
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm {
+  background-color:#5E33BF;
+  border:1px solid #e9eaed;
+  box-shadow:0 0 0 1px transparent;
+  color:#fff
+}
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg {
+  width:1em;
+  height:1em;
+  vertical-align:middle
+}
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg path:not(.ntvBF21SnsKwNa29Rg8A) {
+  transition:fill .2s ease-out;
+  fill:#fff
+}
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg circle.iy0BC5jhx6jMyzcvrLwf,
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg path.iy0BC5jhx6jMyzcvrLwf {
+  fill:transparent;
+  stroke:#fff
+}
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:hover,
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:focus,
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:focus-within,
+.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:active {
+  background-color:#6b40cc;
+  box-shadow:0 0 0 1px #e9eaed
+}
+
+@keyframes KG9mWh693CBdLSEsKEEw {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes aqjkdtZawN5lryW5flKx {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ZD1LzV_5hhnbdBzBCTeC {
+  z-index: 65536;
+}</style><style>.Yhs0neJe89LIyfkAJoxK {
+  overflow: visible;
+}
+
+.Yhs0neJe89LIyfkAJoxK:hover .ZhAn9j0umnIEipjxXmaw {
+  display: block;
+}
+
+.Ivj7JdNm5WGw6xA2l9yt {
+}
+
+.RA6W6tHqfGIgyq6FvHto {
+  background-color: #5e33bf !important;
+  color: #fff !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: background-color 0.2s ease-in !important;
+  cursor: pointer;
+}
+
+.RA6W6tHqfGIgyq6FvHto .df8AcRGrLBTeGlrI8Kpt svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.RA6W6tHqfGIgyq6FvHto .df8AcRGrLBTeGlrI8Kpt svg path:not(.MW1rWF7KNYwKqk4M7BZX) {
+  transition: fill 0.2s ease-out;
+  fill: #fff;
+}
+
+.RA6W6tHqfGIgyq6FvHto .df8AcRGrLBTeGlrI8Kpt svg circle.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto .df8AcRGrLBTeGlrI8Kpt svg path.zgYLZOdQFmvl1k7yJoFd {
+  fill: transparent;
+  stroke: #fff;
+}
+
+.RA6W6tHqfGIgyq6FvHto:hover,
+.RA6W6tHqfGIgyq6FvHto:focus,
+.RA6W6tHqfGIgyq6FvHto:focus-within,
+.RA6W6tHqfGIgyq6FvHto:active {
+  background-color: #fff !important;
+  color: #5e33bf !important;
+  border: 1px solid #5e33bf !important;
+}
+
+.RA6W6tHqfGIgyq6FvHto:hover .df8AcRGrLBTeGlrI8Kpt svg,
+.RA6W6tHqfGIgyq6FvHto:focus .df8AcRGrLBTeGlrI8Kpt svg,
+.RA6W6tHqfGIgyq6FvHto:focus-within .df8AcRGrLBTeGlrI8Kpt svg,
+.RA6W6tHqfGIgyq6FvHto:active .df8AcRGrLBTeGlrI8Kpt svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.RA6W6tHqfGIgyq6FvHto:hover .df8AcRGrLBTeGlrI8Kpt svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.RA6W6tHqfGIgyq6FvHto:focus .df8AcRGrLBTeGlrI8Kpt svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.RA6W6tHqfGIgyq6FvHto:focus-within .df8AcRGrLBTeGlrI8Kpt svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.RA6W6tHqfGIgyq6FvHto:active .df8AcRGrLBTeGlrI8Kpt svg path:not(.MW1rWF7KNYwKqk4M7BZX) {
+  transition: fill 0.2s ease-out;
+  fill: #fff;
+}
+
+.RA6W6tHqfGIgyq6FvHto:hover .df8AcRGrLBTeGlrI8Kpt svg circle.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:hover .df8AcRGrLBTeGlrI8Kpt svg path.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:focus .df8AcRGrLBTeGlrI8Kpt svg circle.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:focus .df8AcRGrLBTeGlrI8Kpt svg path.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:focus-within .df8AcRGrLBTeGlrI8Kpt svg circle.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:focus-within .df8AcRGrLBTeGlrI8Kpt svg path.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:active .df8AcRGrLBTeGlrI8Kpt svg circle.zgYLZOdQFmvl1k7yJoFd,
+.RA6W6tHqfGIgyq6FvHto:active .df8AcRGrLBTeGlrI8Kpt svg path.zgYLZOdQFmvl1k7yJoFd {
+  fill: transparent;
+  stroke: #fff;
+}
+
+.c8ymIgiX1_X1KsA3H1tV {
+  background-color: #646363 !important;
+  color: #fff !important;
+  transform: translate3d(0, 0, 0) !important;
+  transition: background-color 0.2s ease-in !important;
+  cursor: pointer;
+}
+
+.c8ymIgiX1_X1KsA3H1tV .QzECqWHsQ0RPsvPBQcPg {
+  background-color: #9d9d9c !important;
+}
+
+.c8ymIgiX1_X1KsA3H1tV .QzECqWHsQ0RPsvPBQcPg svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.c8ymIgiX1_X1KsA3H1tV .QzECqWHsQ0RPsvPBQcPg svg path:not(.MW1rWF7KNYwKqk4M7BZX) {
+  transition: fill 0.2s ease-out;
+  fill: #fff;
+}
+
+.c8ymIgiX1_X1KsA3H1tV .QzECqWHsQ0RPsvPBQcPg svg circle.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV .QzECqWHsQ0RPsvPBQcPg svg path.zgYLZOdQFmvl1k7yJoFd {
+  fill: transparent;
+  stroke: #fff;
+}
+
+.c8ymIgiX1_X1KsA3H1tV:hover,
+.c8ymIgiX1_X1KsA3H1tV:focus,
+.c8ymIgiX1_X1KsA3H1tV:focus-within,
+.c8ymIgiX1_X1KsA3H1tV:active {
+  background-color: #9d9d9c !important;
+  color: #000 !important;
+}
+
+.c8ymIgiX1_X1KsA3H1tV:hover .QzECqWHsQ0RPsvPBQcPg svg,
+.c8ymIgiX1_X1KsA3H1tV:focus .QzECqWHsQ0RPsvPBQcPg svg,
+.c8ymIgiX1_X1KsA3H1tV:focus-within .QzECqWHsQ0RPsvPBQcPg svg,
+.c8ymIgiX1_X1KsA3H1tV:active .QzECqWHsQ0RPsvPBQcPg svg {
+  width: 18px;
+  height: 18px;
+  vertical-align: middle;
+}
+
+.c8ymIgiX1_X1KsA3H1tV:hover .QzECqWHsQ0RPsvPBQcPg svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.c8ymIgiX1_X1KsA3H1tV:focus .QzECqWHsQ0RPsvPBQcPg svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.c8ymIgiX1_X1KsA3H1tV:focus-within .QzECqWHsQ0RPsvPBQcPg svg path:not(.MW1rWF7KNYwKqk4M7BZX),
+.c8ymIgiX1_X1KsA3H1tV:active .QzECqWHsQ0RPsvPBQcPg svg path:not(.MW1rWF7KNYwKqk4M7BZX) {
+  transition: fill 0.2s ease-out;
+  fill: #fff;
+}
+
+.c8ymIgiX1_X1KsA3H1tV:hover .QzECqWHsQ0RPsvPBQcPg svg circle.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:hover .QzECqWHsQ0RPsvPBQcPg svg path.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:focus .QzECqWHsQ0RPsvPBQcPg svg circle.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:focus .QzECqWHsQ0RPsvPBQcPg svg path.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:focus-within .QzECqWHsQ0RPsvPBQcPg svg circle.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:focus-within .QzECqWHsQ0RPsvPBQcPg svg path.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:active .QzECqWHsQ0RPsvPBQcPg svg circle.zgYLZOdQFmvl1k7yJoFd,
+.c8ymIgiX1_X1KsA3H1tV:active .QzECqWHsQ0RPsvPBQcPg svg path.zgYLZOdQFmvl1k7yJoFd {
+  fill: transparent;
+  stroke: #fff;
+}</style><style>.zQ2oI6HGyJr41sAaSN6A {  
+  width: 195px !important;  
+}
+
+.CBjZQOrWgjhwajg6cNdt {
+  width: 210px !important;
+  margin-left:10px !important;
+}
+
+.yN40z2aRoGZzOKE8ARN3 {
+  position: absolute !important;
+  z-index: 9999999 !important;
+  height: 126px;
+  padding: 10px !important;
+  color: #111 !important;
+  background-color: #f0f0eb !important;
+  border-radius: 4px !important;  
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  -webkit-font-smoothing: antialiased;
+}
+.yN40z2aRoGZzOKE8ARN3 * {
+  font-family: inherit;
+}
+
+.zQ2oI6HGyJr41sAaSN6A:after {
+  content: "";
+  display: block !important;
+  position: absolute !important;
+  bottom: -5px !important;
+  left: 25% !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin-left: -3px !important;
+  border-top: 6px solid #f0f0eb !important;
+  border-left: 6px solid transparent !important;
+  border-right: 6px solid transparent !important;
+}
+
+.CBjZQOrWgjhwajg6cNdt:after {
+  content: "";
+  display: block !important;
+  position: absolute !important;
+  bottom: -10px !important;
+  left: 50% !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin-left: -3px !important;
+  border-top: 10px solid #f0f0eb !important;
+  border-left: 10px solid transparent !important;
+  border-right: 10px solid transparent !important;
+}
+
+.c22rusyRofQicH3i73oO {
+  margin: 0 0 5px;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
+  color: #111;
+}
+
+.MAtUQwoIbEYN6I2IW3iU {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #111;
+}
+.Dzpte9yA2frq_VJhi6CC {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.vCn6PTxk9sBIkF37FZ4Q {
+  display: flex !important;
+  align-items: center !important;
+  color: #111 !important;
+  margin-bottom: 0 !important;
+  line-height: 1.6 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+.qHjXL9KCgUmignnlCgjt {
+  margin-right: 0.5rem !important;
+  margin-top: -3px !important;
+}
+
+.qHjXL9KCgUmignnlCgjt svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.qHjXL9KCgUmignnlCgjt svg path:not(.zFF4AleNIF_4DQ6TA9Ze) {
+  transition: fill 0.2s ease-out;
+  fill: #646363;
+}
+
+.qHjXL9KCgUmignnlCgjt svg circle.Dh3ou9W2aVNVDeowSDkG,
+.qHjXL9KCgUmignnlCgjt svg path.Dh3ou9W2aVNVDeowSDkG {
+  fill: transparent;
+  stroke: #646363;
+}
+
+.c5TyDaoqniVfBZ_t4fl6 {
+  color: #111 !important;
+  font-weight: 700 !important;
+}
+
+.vD1sKbEy4K_sdAhPfoZX {
+  font-weight: 700 !important;
+}
+
+.c5TyDaoqniVfBZ_t4fl6 .qHjXL9KCgUmignnlCgjt svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+}
+
+.c5TyDaoqniVfBZ_t4fl6
+  .qHjXL9KCgUmignnlCgjt
+  svg
+  path:not(.zFF4AleNIF_4DQ6TA9Ze) {
+  transition: fill 0.2s ease-out;
+  fill: #111;
+}
+
+.vD1sKbEy4K_sdAhPfoZX
+  .qHjXL9KCgUmignnlCgjt
+  svg
+  path:not(.zFF4AleNIF_4DQ6TA9Ze) {
+  transition: fill 0.2s ease-out;
+  fill: #fff;
+}
+
+.c5TyDaoqniVfBZ_t4fl6 .qHjXL9KCgUmignnlCgjt svg circle.Dh3ou9W2aVNVDeowSDkG,
+.c5TyDaoqniVfBZ_t4fl6 .qHjXL9KCgUmignnlCgjt svg path.Dh3ou9W2aVNVDeowSDkG {
+  fill: transparent;
+  stroke: #fff;
+}
+
+.kW147OB4sedNGu2d6rGT {
+}
+
+.kW147OB4sedNGu2d6rGT .qHjXL9KCgUmignnlCgjt circle {
+  animation: 1.4s ease-in-out infinite both Buowibv1_rtZ58hAVORO;
+  display: block;
+  fill: transparent;
+  stroke: #111;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 280;
+  stroke-width: 10px;
+  transform-origin: 50% 50%;
+}
+
+
+</style><style>@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdh18S0xR41YDw.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdo18S0xR41YDw.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdg18S0xR41YDw.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdv18S0xR41YDw.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdj18S0xR41YDw.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSdi18S0xR41YDw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZYokSds18S0xR41.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidh18S0xR41YDw.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkido18S0xR41YDw.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidg18S0xR41YDw.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidv18S0xR41YDw.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidj18S0xR41YDw.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkidi18S0xR41YDw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZMkids18S0xR41.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7qsDJB9cme_xc.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7jsDJB9cme_xc.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7rsDJB9cme_xc.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7ksDJB9cme_xc.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7osDJB9cme_xc.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7psDJB9cme_xc.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7nsDJB9cme.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdh18S0xR41YDw.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdo18S0xR41YDw.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdg18S0xR41YDw.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdv18S0xR41YDw.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdj18S0xR41YDw.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCdi18S0xR41YDw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZY4lCds18S0xR41.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdh18S0xR41YDw.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdo18S0xR41YDw.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdg18S0xR41YDw.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdv18S0xR41YDw.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdj18S0xR41YDw.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSdi18S0xR41YDw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZclSds18S0xR41.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydh18S0xR41YDw.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydo18S0xR41YDw.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydg18S0xR41YDw.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydv18S0xR41YDw.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydj18S0xR41YDw.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklydi18S0xR41YDw.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:italic;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKwdSBYKcSV-LCoeQqfX1RYOo3qPZZklyds18S0xR41.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmhdu3cOWxy40.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wkxdu3cOWxy40.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmxdu3cOWxy40.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wmRdu3cOWxy40.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:200;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i94_wlxdu3cOWxw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmhdu3cOWxy40.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwkxdu3cOWxy40.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmxdu3cOWxy40.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmRdu3cOWxy40.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:300;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu3cOWxw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lujVj9_mf.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lujVj9_mf.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNK7lujVj9_mf.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qO67lujVj9_mf.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qN67lujVj9_mf.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lujVj9_mf.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7lujVj9w.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmhdu3cOWxy40.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwkxdu3cOWxy40.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmxdu3cOWxy40.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwmRdu3cOWxy40.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:600;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3i54rwlxdu3cOWxw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmhdu3cOWxy40.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwkxdu3cOWxy40.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmxdu3cOWxy40.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmRdu3cOWxy40.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdu3cOWxw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmhdu3cOWxy40.woff2) format("woff2");unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwkxdu3cOWxy40.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmxdu3cOWxy40.woff2) format("woff2");unicode-range:U+1F00-1FFF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmBdu3cOWxy40.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwmRdu3cOWxy40.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}@font-face{font-family:"Source Sans Pro";font-style:normal;font-weight:900;font-display:swap;src:url(https://fonts.gstatic.com/s/sourcesanspro/v22/6xKydSBYKcSV-LCoeQqfX1RYOo3iu4nwlxdu3cOWxw.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}.ZD1LzV_5hhnbdBzBCTeC{z-index:65536}.BBAoAg1q8YTH2NGsa7Ui{font-family:"Source Sans Pro"}@keyframes aqjkdtZawN5lryW5flKx{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.qEYyC4J5veWyiLaz9gNP{display:inline-flex;flex-wrap:nowrap;align-items:center;justify-content:center;transition:none;position:relative;overflow:hidden;transform:translate3d(0, 0, 0);vertical-align:baseline;margin-bottom:5.58px;padding:3px 18px;font-family:"Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:400;line-height:1.5;text-align:center;cursor:pointer;letter-spacing:.01em;text-decoration:none;background-image:none;border-radius:4px;border:1px solid #646363;background-color:#fff;box-shadow:0 0 0 1px rgba(0,0,0,0);color:#000;transition:box-shadow ease-in-out .1s,background-color ease-in-out .1s}.qEYyC4J5veWyiLaz9gNP svg{width:1em;height:1em;vertical-align:middle}.qEYyC4J5veWyiLaz9gNP svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#666}.qEYyC4J5veWyiLaz9gNP svg circle.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#666}.qEYyC4J5veWyiLaz9gNP:last-child{margin-right:0}.qEYyC4J5veWyiLaz9gNP svg{min-width:1em;margin-left:.2rem;margin-right:.2rem}.qEYyC4J5veWyiLaz9gNP:hover,.qEYyC4J5veWyiLaz9gNP:focus,.qEYyC4J5veWyiLaz9gNP:focus-within,.qEYyC4J5veWyiLaz9gNP:active{outline:none;text-decoration:none;color:#000;background-color:#f7f7f7;box-shadow:0 0 0 1px #5e34be;text-decoration:none}.qEYyC4J5veWyiLaz9gNP:hover svg,.qEYyC4J5veWyiLaz9gNP:focus svg,.qEYyC4J5veWyiLaz9gNP:focus-within svg,.qEYyC4J5veWyiLaz9gNP:active svg{width:1em;height:1em;vertical-align:middle}.qEYyC4J5veWyiLaz9gNP:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),.qEYyC4J5veWyiLaz9gNP:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),.qEYyC4J5veWyiLaz9gNP:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),.qEYyC4J5veWyiLaz9gNP:active svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#000}.qEYyC4J5veWyiLaz9gNP:hover svg circle.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:hover svg path.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:focus svg circle.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:focus svg path.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:active svg circle.iy0BC5jhx6jMyzcvrLwf,.qEYyC4J5veWyiLaz9gNP:active svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#000}.qEYyC4J5veWyiLaz9gNP:disabled{cursor:not-allowed;opacity:.8;background-color:#fff;box-shadow:0 0 0 1px rgba(0,0,0,0)}.qEYyC4J5veWyiLaz9gNP+button,.qEYyC4J5veWyiLaz9gNP+.qEYyC4J5veWyiLaz9gNP{margin-left:5.58px}.htXPkXdMWWcmr0_dul7A{padding:0;background-color:rgba(0,0,0,0);border:0;box-shadow:none;color:#000}.htXPkXdMWWcmr0_dul7A:hover,.htXPkXdMWWcmr0_dul7A:focus,.htXPkXdMWWcmr0_dul7A:focus-within,.htXPkXdMWWcmr0_dul7A:active{background-color:rgba(0,0,0,0);border:0;box-shadow:none;color:#000;text-decoration:underline}.htXPkXdMWWcmr0_dul7A:disabled{text-decoration:none}.MvZ5MuRzqsBeDt5z0X1e svg{margin-top:-5px;margin-right:.75rem;animation-name:aqjkdtZawN5lryW5flKx;animation-duration:3s;animation-iteration-count:infinite;animation-timing-function:linear;transform-origin:50% 50%}.MvZ5MuRzqsBeDt5z0X1e.Tz2rVjh6IjVdduJP08Qm svg use{stroke:#fff}.ZChY5ShGlfvLluUVYdtA{padding:9px 36px;font-size:21.6px;font-size:1.2rem}.L7kF1ZLpIeOYvvHdD7Dg{padding:3.5px 7px;font-size:14.4px;font-size:.8rem}.c8FhE1WPTbl4j6Blh_Cw{width:100%;margin-left:0 !important}.Tz2rVjh6IjVdduJP08Qm{border:0;font-weight:300;background-color:#5e33bf;border:1px solid #5e34be;box-shadow:0 0 0 1px rgba(0,0,0,0);color:#fff}.Tz2rVjh6IjVdduJP08Qm svg{width:1em;height:1em;vertical-align:middle}.Tz2rVjh6IjVdduJP08Qm svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#fff}.Tz2rVjh6IjVdduJP08Qm svg circle.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#fff}.Tz2rVjh6IjVdduJP08Qm:hover,.Tz2rVjh6IjVdduJP08Qm:focus,.Tz2rVjh6IjVdduJP08Qm:focus-within,.Tz2rVjh6IjVdduJP08Qm:active{color:#fff;background-color:#6b40cc;box-shadow:0 0 0 1px #5e34be}.Tz2rVjh6IjVdduJP08Qm:hover svg,.Tz2rVjh6IjVdduJP08Qm:focus svg,.Tz2rVjh6IjVdduJP08Qm:focus-within svg,.Tz2rVjh6IjVdduJP08Qm:active svg{width:1em;height:1em;vertical-align:middle}.Tz2rVjh6IjVdduJP08Qm:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),.Tz2rVjh6IjVdduJP08Qm:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),.Tz2rVjh6IjVdduJP08Qm:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),.Tz2rVjh6IjVdduJP08Qm:active svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#fff}.Tz2rVjh6IjVdduJP08Qm:hover svg circle.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:hover svg path.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:focus svg circle.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:focus svg path.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:active svg circle.iy0BC5jhx6jMyzcvrLwf,.Tz2rVjh6IjVdduJP08Qm:active svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#fff}.Tz2rVjh6IjVdduJP08Qm:disabled{background-color:#5e33bf;box-shadow:0 0 0 1px rgba(0,0,0,0);color:#fff}.K29Do4qZAslPSEk0asSZ{min-height:auto;width:1.75em;height:1.75em;margin:0 .5rem 0 0;padding:0;border:1px solid rgba(0,0,0,0);border-radius:50%;background-color:rgba(0,0,0,0);box-shadow:none}.K29Do4qZAslPSEk0asSZ svg{width:1em;height:1em;vertical-align:middle}.K29Do4qZAslPSEk0asSZ svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#666}.K29Do4qZAslPSEk0asSZ svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#666}.K29Do4qZAslPSEk0asSZ:hover svg,.K29Do4qZAslPSEk0asSZ:focus svg,.K29Do4qZAslPSEk0asSZ:focus-within svg,.K29Do4qZAslPSEk0asSZ:active svg{width:1em;height:1em;vertical-align:middle}.K29Do4qZAslPSEk0asSZ:hover svg path:not(.ntvBF21SnsKwNa29Rg8A),.K29Do4qZAslPSEk0asSZ:focus svg path:not(.ntvBF21SnsKwNa29Rg8A),.K29Do4qZAslPSEk0asSZ:focus-within svg path:not(.ntvBF21SnsKwNa29Rg8A),.K29Do4qZAslPSEk0asSZ:active svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#5e34be}.K29Do4qZAslPSEk0asSZ:hover svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:hover svg path.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:focus svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:focus svg path.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:focus-within svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:focus-within svg path.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:active svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ:active svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#5e34be}.K29Do4qZAslPSEk0asSZ:disabled{opacity:1;background-color:#fff;box-shadow:none}.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm{background-color:#5e33bf;border:1px solid #e9eaed;box-shadow:0 0 0 1px rgba(0,0,0,0);color:#fff}.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg{width:1em;height:1em;vertical-align:middle}.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg path:not(.ntvBF21SnsKwNa29Rg8A){transition:fill .2s ease-out;fill:#fff}.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg circle.iy0BC5jhx6jMyzcvrLwf,.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm svg path.iy0BC5jhx6jMyzcvrLwf{fill:rgba(0,0,0,0);stroke:#fff}.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:hover,.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:focus,.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:focus-within,.K29Do4qZAslPSEk0asSZ.Tz2rVjh6IjVdduJP08Qm:active{background-color:#6b40cc;box-shadow:0 0 0 1px #e9eaed}@keyframes KG9mWh693CBdLSEsKEEw{0%{transform:rotateZ(0deg)}100%{transform:rotateZ(360deg)}}@keyframes aqjkdtZawN5lryW5flKx{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.ZD1LzV_5hhnbdBzBCTeC{z-index:65536}</style><style>.O2kKYom4PJdnrcnGyfli{z-index:65536}.vqLLjXCvIZqFf6By7FsC{margin:0px !important;padding:0px !important}.D14sb1esRO00iZ1nebmr{position:fixed;padding:0px;margin:0px;width:250px;height:100px;box-shadow:none;margin:0;padding:0;display:flex;flex-direction:column;bottom:30px;left:0;z-index:9999999999999}.D14sb1esRO00iZ1nebmr.jmxllJPgW9QEseF_vRoS{bottom:90px}.ussejiMsgWzhgro3ajrg{bottom:80px !important;left:20px !important}.LiGTdyntXC8pa1XtEx0l{border-top-left-radius:30px !important;border-bottom-left-radius:30px !important}.SNO5yrb7NobAstipiMDb{height:100px;width:250px;left:0px;bottom:0px;box-shadow:none;margin:0px;border:0px;background-color:rgba(0,0,0,0) !important;overflow:hidden}.aDFGVZWO3T4Y2VPKu1IJ{display:block;margin-left:-8px}.hCym1FzCCgnchmEHLh2m{bottom:0px;left:0px;width:245px;height:80px;z-index:2000;margin:0;background-color:rgba(0,0,0,0);box-shadow:none;transform:translateX(-155px)}.YyRq9ewDY2IoRu54yZUi{display:flex;align-items:center;justify-content:flex-end;position:fixed;left:0px;width:220px;height:60px;padding-left:15px;background-color:#646363;color:#fff;border-top-right-radius:30px;border-bottom-right-radius:30px;transition:all .2s ease-in;cursor:pointer}.suMsnHlxitgjuMG9mk9c{}.RF3Ft4wMCSGJSNMh4BQf{flex-grow:1;padding-right:20px;line-height:1.1;text-align:center;transition:opacity .2s ease-in;color:#fff;opacity:1}.TRRuEGZkYLlovFGRV4Bg{height:60px;margin-right:5px;margin-top:7px;border-radius:50%}.nmH3eZaEDNZYzltAf3I9{height:60px;margin-right:5px;margin-top:7px;border-radius:50%}.WLHFcMAIg7lJLH6HZFnr{width:60px;height:60px;margin-right:5px;margin-top:15px;border-radius:50%}._9rvR6bGxpo9OdTnXTR1{transition:transform .2s ease-in;transform:translateX(-155px)}._rPZrbFgvMZOpS5lclxw{transition:transform .2s ease-in;transform:translateX(0)}.L75gelpYh4_q7uSDTb2x{transition:transform .5s ease-out;transform:translateX(-260px)}.mlJ8rgJkvB_9abQfz6BZ{border:2px solid rgba(0,0,0,0);border-left:0;background-color:#5e33bf;border-left:0;font-size:22px}.mlJ8rgJkvB_9abQfz6BZ:hover{background-color:#5e33bf}.mlJ8rgJkvB_9abQfz6BZ .RF3Ft4wMCSGJSNMh4BQf{opacity:1}.lWkUu_3zoMartWQEOtNJ .RF3Ft4wMCSGJSNMh4BQf{opacity:0}.TLjRZPoo5DaC8kofv5i8 .RF3Ft4wMCSGJSNMh4BQf{opacity:1}.ZbdpEJU6Zi9G8AWLuw2d{transition:transform .2s ease-in;transform:translateX(-162.5px)}.B48hMquTcZ958Ijv64UB{opacity:.8;box-shadow:none;font-size:18px}.TLjRZPoo5DaC8kofv5i8{opacity:1;box-shadow:0 2px 4px 0 rgba(0,0,0,.5);background:#646363;font-size:18px}.PutPRtxMCwBXTIlJ1ERX{transition:transform .2s ease-in;transform:translateX(0)}.MZZI6CipqCZYqNKOU41z{display:none;position:absolute;width:20px;height:20px !important;color:#111;background-color:#f0f0eb;border:1px solid #111;border-radius:20px;line-height:20px;font-size:16px;top:0;right:0;z-index:4000;cursor:pointer}.MZZI6CipqCZYqNKOU41z:hover{display:block}.BYG4Q2WQqiz9_B9pi8bI{position:relative;left:-1px;top:-2px}</style><style>.g2yPL5PuP5YcxDAm6OHT {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 19999;
+}
+.TKXFYjyTT7BRVXk2l6uF a {
+    color: #5e33bf;
+    font-weight: 700;
+    text-decoration: underline;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #5e33bf;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a svg circle.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #5e33bf;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a:hover,
+  .TKXFYjyTT7BRVXk2l6uF a:focus,
+  .TKXFYjyTT7BRVXk2l6uF a:focus-within,
+  .TKXFYjyTT7BRVXk2l6uF a:active {
+    color: #5e33bf;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a:hover svg,
+  .TKXFYjyTT7BRVXk2l6uF a:focus svg,
+  .TKXFYjyTT7BRVXk2l6uF a:focus-within svg,
+  .TKXFYjyTT7BRVXk2l6uF a:active svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .TKXFYjyTT7BRVXk2l6uF a:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .TKXFYjyTT7BRVXk2l6uF a:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .TKXFYjyTT7BRVXk2l6uF a:active svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #06512c;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  .TKXFYjyTT7BRVXk2l6uF a:active svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #fff;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a:not([href]) {
+    opacity: 0.8;
+    cursor: not-allowed;
+    color: #fff !important;
+  }
+  .TKXFYjyTT7BRVXk2l6uF a.o53g2xMKPHItiQ_Pa50z {
+    color: #fff !important;
+  }
+  
+  .TKXFYjyTT7BRVXk2l6uF > :first-child {
+    margin-top: 0;
+  }
+  .TKXFYjyTT7BRVXk2l6uF > :last-child {
+    margin-bottom: 0;
+  }
+  
+  .N8JKKJ9GMp6XB25A3VK8 {
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-mask-image: radial-gradient(150px at bottom 60px left 290px, transparent 99%, black 100%);
+    mask-image: radial-gradient(150px at bottom 60px left 290px, transparent 99%, black 100%);
+  }
+  
+  .WKlsVvzGQcaszJKQigkg {
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  
+  .NFIyN4kDgBJX4_hCTjAo {
+    -webkit-mask-image: radial-gradient(350px at bottom 60px left 40px, transparent 99%, black 100%);
+    mask-image: radial-gradient(350px at bottom 60px left 40px, transparent 99%, black 100%);
+  }
+  
+  .xsQ_pBk79MDxlAtWKQ1i {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+  
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    min-height: 2.5em;
+    -webkit-transition: none;
+    transition: none;
+    position: relative;
+    overflow: hidden;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    vertical-align: middle;
+    padding: 6px 18px;
+    font-family: "Clarivate", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #f3f9f6;
+    background-color: #f3f9f6;
+    color: #4a494a;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #b0afb0;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #b0afb0;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:hover,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus-within,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:active,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:hover,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus-within,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:active {
+    outline: none;
+    text-decoration: none;
+    color: #4a494a;
+    background-color: #e9f4ee;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:hover svg,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus svg,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus-within svg,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:active svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:hover svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus-within svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:active svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:active svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:active svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #4a494a;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:active svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:active svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V:disabled,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .pOV6BFePmeRb9zzOJ09V svg,
+  .YqtWBHxfSeuDDI4tBtJq .pOV6BFePmeRb9zzOJ09V svg {
+    margin-right: 0.75rem;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .ZFFejwogdbRltBtqgc3n svg,
+  .YqtWBHxfSeuDDI4tBtJq .ZFFejwogdbRltBtqgc3n svg {
+    margin-right: 0;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb {
+    min-height: auto;
+    width: 1.75em;
+    height: 1.75em;
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active {
+    border: 1px solid #f3f9f6;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .SlU_AzpYh4lpS86_AlqH,
+  .YqtWBHxfSeuDDI4tBtJq .SlU_AzpYh4lpS86_AlqH {
+    width: 100%;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z {
+    border: 0;
+    background-color: #f3f9f6;
+    color: #fff;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z svg,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #fff;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #fff;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:hover,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:focus,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:hover,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:focus {
+    color: #fff;
+    background-color: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:hover svg,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:focus svg,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:hover svg,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:focus svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #fff;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .o53g2xMKPHItiQ_Pa50z:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .o53g2xMKPHItiQ_Pa50z:focus svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #fff;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .jrqth2DBy5Tfn6bolRG3,
+  .YqtWBHxfSeuDDI4tBtJq .jrqth2DBy5Tfn6bolRG3 {
+    padding: 9px 36px;
+    font-size: 21.6px;
+    font-size: 1.2rem;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb {
+    min-height: auto;
+    width: 2.5em;
+    height: 2.5em;
+    margin: 0 0.5rem 0 0;
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    background-color: transparent;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb svg {
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active {
+    border: 1px solid #5e33bf;
+    background-color: #e9f4ee;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover svg,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus svg,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within svg,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active svg {
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: middle;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:active svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:active svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #5e33bf;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb:last-child,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb:last-child {
+    margin-right: 0;
+  }
+  #fj4Y2VBM_jUdoqg8vxxE .x_CwlUpfr3F8cJGqU9wb svg,
+  .YqtWBHxfSeuDDI4tBtJq .x_CwlUpfr3F8cJGqU9wb svg {
+    margin-right: 0;
+  }
+  
+  .WKlsVvzGQcaszJKQigkg {
+    background-color: rgba(255, 255, 255, 0.8);
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .YqtWBHxfSeuDDI4tBtJq,
+  .y2eGkYbULQmLiDmmsaE_,
+  .G7McxXXrgjal0gygY7go,
+  .cA8Idbs6OA0BSmKw9Tam {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: "Clarivate", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+  .YqtWBHxfSeuDDI4tBtJq *:before,
+  .y2eGkYbULQmLiDmmsaE_ *:before,
+  .G7McxXXrgjal0gygY7go *:before,
+  .cA8Idbs6OA0BSmKw9Tam *:before,
+  .YqtWBHxfSeuDDI4tBtJq *:after,
+  .y2eGkYbULQmLiDmmsaE_ *:after,
+  .G7McxXXrgjal0gygY7go *:after,
+  .cA8Idbs6OA0BSmKw9Tam *:after {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .eHXvC2pkWtoHh3fOdygK {
+    overflow: hidden !important;
+  }
+  
+  .N7GBO0t9WTd0OozV15Vh {
+    z-index: 70000000 !important;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: #dadada;
+    opacity: 0.8;
+  }
+  
+  .xNhUX6MpP3eU4apTCdOF {
+    position: relative;
+    z-index: 80000000 !important;
+  }
+  
+  .YqtWBHxfSeuDDI4tBtJq {
+    position: fixed;
+    bottom: 30px;
+    left: 320px;
+    width: 350px;
+    z-index: 80000000;
+    padding: 15px;
+    background-color: #5e33bf;
+    border: 3px solid #5e33bf;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.3);
+  }
+  .YqtWBHxfSeuDDI4tBtJq:before,
+  .YqtWBHxfSeuDDI4tBtJq:after {
+    content: "";
+    position: absolute;
+  }
+  
+  .wP_d6sVNjv41TuoIOqgu {
+    top: 20vh;
+    left: 50vw;
+    margin-left: -175px;
+  }
+  
+  .y2eGkYbULQmLiDmmsaE_ {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    position: fixed;
+    min-width: 350px;
+    min-height: 350px;
+    z-index: 80000000;
+    padding: 15px;
+    background-color: #fff;
+    border: 10px dashed #696969;
+    border-radius: 4px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    text-align: center;
+  }
+  .y2eGkYbULQmLiDmmsaE_ .MU1OWZXYSl7cGLHsourz {
+    padding-right: 0;
+  }
+  
+  .P8xmsluQbsK9kCB8J4TB:before {
+    top: 50%;
+    right: -50px;
+    width: 50px;
+    margin-top: -5px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .P8xmsluQbsK9kCB8J4TB:after {
+    top: 50%;
+    right: -80px;
+    height: 0;
+    width: 0;
+    margin-top: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid #5e33bf;
+  }
+  
+  .G6JUSg1GIC3pcwn4LtwJ:before {
+    top: 25px;
+    right: -50px;
+    width: 50px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .G6JUSg1GIC3pcwn4LtwJ:after {
+    top: 10px;
+    right: -80px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid #5e33bf;
+  }
+  
+  .TSVTVmbeKDsx1uaA3jwg:before {
+    bottom: 25px;
+    right: -50px;
+    width: 50px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .TSVTVmbeKDsx1uaA3jwg:after {
+    bottom: 10px;
+    right: -80px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid #5e33bf;
+  }
+  
+  .lXK6keKCXOgkCYRWTuuw:before {
+    top: 50%;
+    left: -50px;
+    width: 50px;
+    margin-top: -5px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .lXK6keKCXOgkCYRWTuuw:after {
+    top: 50%;
+    left: -80px;
+    height: 0;
+    width: 0;
+    margin-top: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid #5e33bf;
+  }
+  
+  .ziKSzAZaZuS7hitu2X8Z:before {
+    top: 25px;
+    left: -50px;
+    width: 50px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .ziKSzAZaZuS7hitu2X8Z:after {
+    top: 10px;
+    left: -80px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid #5e33bf;
+  }
+  
+  .quK2DZCe63wsbgp9iUm4:before {
+    bottom: 25px;
+    left: -50px;
+    width: 50px;
+    border-top: 5px solid #5e33bf;
+    border-bottom: 5px solid #5e33bf;
+  }
+  .quK2DZCe63wsbgp9iUm4:after {
+    bottom: 10px;
+    left: -80px;
+    height: 0;
+    width: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 30px solid #5e33bf;
+  }
+  
+  .GrMWkdgGakDmpReMdXtx:before {
+    top: -50px;
+    left: 50%;
+    height: 50px;
+    margin-left: -5px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .GrMWkdgGakDmpReMdXtx:after {
+    left: 50%;
+    top: -80px;
+    height: 0;
+    width: 0;
+    margin-left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid #5e33bf;
+  }
+  
+  .YksVyuEMbXSg025JadDh:before {
+    left: 25px;
+    top: -50px;
+    height: 50px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .YksVyuEMbXSg025JadDh:after {
+    left: 10px;
+    top: -80px;
+    height: 0;
+    width: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid #5e33bf;
+  }
+  
+  .CTXY9eKXSOcPsREchYI2:before {
+    right: 25px;
+    top: -50px;
+    height: 50px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .CTXY9eKXSOcPsREchYI2:after {
+    right: 10px;
+    top: -80px;
+    height: 0;
+    width: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 30px solid #5e33bf;
+  }
+  
+  .mV5XjFYui13hlKYiF9fz:before {
+    bottom: -50px;
+    left: 50%;
+    height: 50px;
+    margin-left: -5px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .mV5XjFYui13hlKYiF9fz:after {
+    left: 50%;
+    bottom: -80px;
+    height: 0;
+    width: 0;
+    margin-left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid #5e33bf;
+  }
+  
+  .jlXUNrOMfrz8QPtWwi9D:before {
+    bottom: -50px;
+    left: 25px;
+    height: 50px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .jlXUNrOMfrz8QPtWwi9D:after {
+    left: 10px;
+    bottom: -80px;
+    height: 0;
+    width: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid #5e33bf;
+  }
+  
+  .JeoJI1NdjwsQC_qBgQws:before {
+    bottom: -50px;
+    right: 25px;
+    height: 50px;
+    border-left: 5px solid #5e33bf;
+    border-right: 5px solid #5e33bf;
+  }
+  .JeoJI1NdjwsQC_qBgQws:after {
+    right: 10px;
+    bottom: -80px;
+    height: 0;
+    width: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 30px solid #5e33bf;
+  }
+  
+  .MU1OWZXYSl7cGLHsourz {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding-right: 85px;
+    font-size: 26px;
+    line-height: 1.25;
+  }
+  
+  .G7McxXXrgjal0gygY7go {
+    min-width: 30px;
+    height: 40px;
+    margin-right: 0.75rem;
+  }
+  .G7McxXXrgjal0gygY7go svg {
+    max-height: 40px;
+    height: auto;
+    width: auto;
+  }
+  
+  .mRKSYTEhLTxmKLYCNnX9 {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-height: 40px;
+  }
+  
+  .cA8Idbs6OA0BSmKw9Tam {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    margin: 0;
+    padding: 1rem;
+    outline: none;
+    background-color: transparent;
+    color: #fff;
+    font-weight: 400;
+    text-decoration: none;
+    border: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    cursor: pointer;
+  }
+  .cA8Idbs6OA0BSmKw9Tam svg {
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  .cA8Idbs6OA0BSmKw9Tam svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #fff;
+  }
+  .cA8Idbs6OA0BSmKw9Tam svg circle.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #696969;
+  }
+  .cA8Idbs6OA0BSmKw9Tam:hover,
+  .cA8Idbs6OA0BSmKw9Tam:focus,
+  .cA8Idbs6OA0BSmKw9Tam:focus-within,
+  .cA8Idbs6OA0BSmKw9Tam:active {
+    color: #dadada;
+    background-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+  .cA8Idbs6OA0BSmKw9Tam:hover svg,
+  .cA8Idbs6OA0BSmKw9Tam:focus svg,
+  .cA8Idbs6OA0BSmKw9Tam:focus-within svg,
+  .cA8Idbs6OA0BSmKw9Tam:active svg {
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    vertical-align: middle;
+  }
+  .cA8Idbs6OA0BSmKw9Tam:hover svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .cA8Idbs6OA0BSmKw9Tam:focus svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .cA8Idbs6OA0BSmKw9Tam:focus-within svg path:not(.UEpjZcO6H4w0RvC9Kcye),
+  .cA8Idbs6OA0BSmKw9Tam:active svg path:not(.UEpjZcO6H4w0RvC9Kcye) {
+    -webkit-transition: fill 0.2s ease-out;
+    transition: fill 0.2s ease-out;
+    fill: #dadada;
+  }
+  .cA8Idbs6OA0BSmKw9Tam:hover svg circle.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:hover svg path.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:focus svg circle.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:focus svg path.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:focus-within svg circle.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:focus-within svg path.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:active svg circle.gZCekxKuewhQhlBZDuJQ,
+  .cA8Idbs6OA0BSmKw9Tam:active svg path.gZCekxKuewhQhlBZDuJQ {
+    fill: transparent;
+    stroke: #5e33bf;
+  }
+  
+  .TKXFYjyTT7BRVXk2l6uF {
+    margin: 15px 0;
+    line-height: 1.25;
+    background: #5e33bf;
+    color: #fff;
+  }
+  .TKXFYjyTT7BRVXk2l6uF:first-of-type,
+  .TKXFYjyTT7BRVXk2l6uF:first-child {
+    margin-top: 0;
+  }
+  .TKXFYjyTT7BRVXk2l6uF:last-child {
+    margin-bottom: 0;
+  }
+  
+  .NnI3UXnyndFcINeMIp0o {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .FV8g2jL10G1UB_eAf9BA {
+    text-align: right;
+  }
+  .FV8g2jL10G1UB_eAf9BA a{
+   color: white;
+   text-decoration: underline;
+  }
+  .FV8g2jL10G1UB_eAf9BA a:hover{
+    color: white;
+    text-decoration: none;
+   }
+  
+  .wwyWCr_3HEEc_JqAydbV {
+    text-align: center;
+  }
+  .z4zawF9GdEBCaptUBX5p {
+    cursor: pointer;
+  }
+  .JcejyBv9JYPL8TJLsJFI {
+    cursor: pointer;
+  }
+  .Mo7gxI5NC9YwGrb2VuBI {
+    position: absolute;
+    width: 273px;
+    bottom: 120px;
+    left: 155px;
+    padding: 15px;
+    border-radius: 2px;
+    background-color: rgba(48, 55, 61, 1);
+    z-index: 500000000;
+  }
+  
+  .h5vXAMG8g9yvOW1B6wro {
+    left: 15px;
+    bottom: 100px;
+  }
+  
+  .h5vXAMG8g9yvOW1B6wro::after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: -15px;
+    left: 15px;
+    height: 0;
+    border-top: 15px solid #30373d;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+  }
+  
+  .IAiRh1I0k5egyOBwu5xu {
+    bottom: 111px;
+    left: 283px;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: rgba(48, 55, 61, 1);
+  }
+  
+  .SH95mwXWE4rR88NI9kdw {
+    font-family: "Clarivate";
+    text-align: left;
+    color: #fff;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+  
+  /* Content visibility */
+  .JDTc_LYE4hywcP2UrMj1 {
+    display: none;
+    height: 100%;
+    -webkit-animation-duration: 500ms;
+    animation-duration: 500ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+  
+  .JDTc_LYE4hywcP2UrMj1.xt3prUvhYpXaDTATSaqi {
+    display: block;
+    -webkit-animation-name: cyDGHsYvrKbP8e_GTG2d;
+    animation-name: cyDGHsYvrKbP8e_GTG2d;
+  }
+  
+  @keyframes cyDGHsYvrKbP8e_GTG2d {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  #p23dTdp5Vjnb1kKXw0Pm {
+    color: #fff;
+  }
+  
+  #p23dTdp5Vjnb1kKXw0Pm:hover {
+    color: #dadada;
+    text-decoration: none;
+  }
+  </style></head>
+
+    <body class="">
+
+        
+        
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <aside class="col-lg" style="height: 778px; top: 0px;">
+ 
+                    <header><h1 data-id="cs50s-introduction-to-artificial-intelligence-with-python"><a href="https://cs50.harvard.edu/ai/">CS50’s Introduction to Artificial Intelligence with Python</a></h1>
+
+<p>OpenCourseWare</p>
+
+<p><a class="pr-1 small" href="https://cs50.harvard.edu/donate">Donate<i aria-hidden="true" class="fas fa-external-link-alt ps-2"></i></a></p>
+
+<p><a href="https://brianyu.me/">Brian Yu</a><br>
+<a href="mailto:brian@cs.harvard.edu">brian@cs.harvard.edu</a></p>
+
+<p><a href="https://cs.harvard.edu/malan/">David J. Malan</a>
+<br>
+<a href="mailto:malan@harvard.edu">malan@harvard.edu</a>
+<br>
+<a class="mr-1" href="https://www.facebook.com/dmalan"><i aria-hidden="true" class="fa-brands fa-facebook-f" title="Facebook"></i><span class="sr-only">Facebook</span></a>
+<a class="mr-1" href="https://github.com/dmalan"><i aria-hidden="true" class="fa-brands fa-github" title="GitHub"></i><span class="sr-only">GitHub</span></a>
+<a class="mr-1" href="https://www.instagram.com/davidjmalan/"><i aria-hidden="true" class="fa-brands fa-instagram" title="Instagram"></i><span class="sr-only">Instagram</span></a>
+<a class="mr-1" href="https://www.linkedin.com/in/malan/"><i aria-hidden="true" class="fa-brands fa-linkedin" title="LinkedIn"></i><span class="sr-only">LinkedIn</span></a>
+<a class="mr-1" href="https://www.reddit.com/user/davidjmalan"><i aria-hidden="true" class="fa-brands fa-reddit-alien" title="Reddit"></i><span class="sr-only">Reddit</span></a>
+<a class="mr-1" href="https://www.threads.net/@davidjmalan"><i aria-hidden="true" class="fa-brands fa-threads" title="Threads"></i><span class="sr-only">Threads</span></a>
+<a class="mr-1" href="https://twitter.com/davidjmalan"><i aria-hidden="true" class="fa-brands fa-twitter" title="Twitter"></i><span class="sr-only">Twitter</span></a></p></header>
+
+                    
+
+                    <button aria-controls="nav" aria-expanded="false" class="btn btn-sm collapsed d-lg-none" data-bs-target="aside &gt; nav" data-bs-toggle="collapse">
+                        Menu
+                    </button>
+
+                    <nav class="collapse d-lg-block" id="nav"><hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/x/puzzles/"><i class="fas fa-puzzle-piece pe-2"></i>CS50x Puzzle Day 2025</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/zoom/"><i class="fa-solid fa-video me-2"></i>Zoom Meetings<span class="badge ms-2 p-1 text-bg-warning">new</span></a></li>
+</ul>
+
+<!-- Tools -->
+<hr class="small">
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.ai/"><i class="fa-solid fa-duck pe-2 text-decoration-none"></i>CS50.ai</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/ed"><i class="fa-solid fa-comment-question pe-2 text-decoration-none"></i>Ed Discussion</a> for Q&amp;A</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.dev/"><i class="fa-solid fa-laptop pe-2 text-decoration-none"></i>Visual Studio Code</a></li>
+</ul>
+
+<!-- Course Nav -->
+<hr>
+
+<ol start="0">
+  <li><a href="https://cs50.harvard.edu/ai/weeks/0/">Search</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/1/">Knowledge</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/2/">Uncertainty</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/3/">Optimization</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/4/">Learning</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/5/">Neural Networks</a></li>
+  <li><a href="https://cs50.harvard.edu/ai/weeks/6/">Language</a></li>
+</ol>
+
+<!-- Items that might usually appear in an academic syllabus -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/honesty/">Academic Honesty</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/certificate/">CS50 Certificate</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/faqs/">FAQs</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.me/cs50ai">Gradebook</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/staff/">Staff</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+</ul>
+
+<!-- Where to watch or take the class course -->
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://apps.apple.com/us/app/cs50/id1631064453">Apple TV</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/ai">edX</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://play.google.com/store/apps/details?id=edu.harvard.cs50.googletv">Google TV</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://web.dce.harvard.edu/extension/csci/e/80">Harvard Extension School</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://web.dce.harvard.edu/summer/csci/s/80">Harvard Summer School</a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://channelstore.roku.com/details/e338f60adfb133abc19eac2da9e5c505:40cee2a1909355bc4496086c8fa4a86f/cs50">Roku <span class="badge ms-2 p-1 text-bg-warning">new</span></a></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.youtube.com/playlist?list=PLhQjrBD2T381PopUTYtMSstgk-hsTGkVm">YouTube</a></li>
+</ul>
+
+<!-- Manual page, style guide, other docs -->
+
+<!-- Status Page -->
+<hr>
+
+<ul class="small fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.statuspage.io/">Status Page</a></li>
+</ul>
+
+<!-- Communities -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/communities/"><strong>Communities</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://bsky.app/profile/cs50.harvard.edu">Bluesky</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.clubhouse.com/club/cs50">Clubhouse</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://discord.gg/cs50">Discord</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/ed">Ed</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.facebook.com/groups/cs50/">Facebook Group</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.facebook.com/cs50/">Facebook Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://github.com/cs50">GitHub</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://gitter.im/cs50/x">Gitter</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://instagram.com/cs50">Instagram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.linkedin.com/groups/7437240/">LinkedIn Group</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.linkedin.com/school/CS50/">LinkedIn Page</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.medium.com/">Medium</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.quora.com/topic/CS50">Quora</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.reddit.com/r/cs50/">Reddit</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.edx.org/slack">Slack</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.snapchat.com/add/cs50">Snapchat</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://soundcloud.com/cs50">SoundCloud</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.stackexchange.com/">Stack Exchange</a> <span class="badge bg-light ms-1 py-1 rounded-pill text-dark">Q&amp;A</span></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://t.me/cs50x">Telegram</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.tiktok.com/@cs50">TikTok</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://www.threads.net/@cs50">Threads</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://x.com/cs50">X Account</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://x.com/i/communities/1722308663522594923">X Community</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://www.youtube.com/subscription_center?add_user=cs50tv">YouTube</a></li>
+</ul>
+
+<!-- Courses -->
+<hr>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai/courses/"><strong>Courses</strong></a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/x">CS50x</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/ai">CS50 AI</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/business">CS50 Business</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="https://cs50.harvard.edu/cybersecurity">CS50 Cybersecurity</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/law">CS50 for Lawyers</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/python">CS50 Python</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/r">CS50 R</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/scratch">CS50 Scratch</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/sql">CS50 SQL</a></li>
+  <li data-marker="*" class="small"><span class="fa-li"><i class="fas fa-square"></i></span><a href="http://cs50.harvard.edu/web">CS50 Web</a></li>
+</ul>
+
+<!-- Harvard Shop -->
+<hr>
+
+<p><a href="https://cs50.harvardshop.com/"><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/shop.png" alt="Harvard Shop"></a></p>
+
+<!-- Legal -->
+<hr>
+
+<p><a href="https://cs50.harvard.edu/ai/license/" class="small"><i class="fab fa-creative-commons me-1"></i>License</a></p></nav>
+
+                    <footer></footer>
+
+                </aside>
+
+                <main class="col-lg" style="margin-bottom: 402px; margin-top: 0px;">
+
+                    <a data-id="" id="lecture-0" style="top: 0px;"></a><h1><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#lecture-0">Lecture 0</a></h1>
+
+<a data-id="" id="artificial-intelligence" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#artificial-intelligence">Artificial Intelligence</a></h2>
+
+<p>Artificial Intelligence (AI) covers a range of techniques that appear as sentient behavior by the computer. For example, AI is used to recognize faces in photographs on your social media, beat the World’s Champion in chess, and process your speech when you speak to Siri or Alexa on your phone.</p>
+
+<p>In this course, we will explore some of the ideas that make AI possible:</p>
+
+<ol start="0">
+  <li><strong>Search</strong></li>
+</ol>
+
+<p>Finding a solution to a problem, like a navigator app that finds the best route from your origin to the destination, or like playing a game and figuring out the next move.</p>
+
+<ol start="1">
+  <li><strong>Knowledge</strong></li>
+</ol>
+
+<p>Representing information and drawing inferences from it.</p>
+
+<ol start="2">
+  <li><strong>Uncertainty</strong></li>
+</ol>
+
+<p>Dealing with uncertain events using probability.</p>
+
+<ol start="3">
+  <li><strong>Optimization</strong></li>
+</ol>
+
+<p>Finding not only a correct way to solve a problem, but a better—or the best—way to solve it.</p>
+
+<ol start="4">
+  <li><strong>Learning</strong></li>
+</ol>
+
+<p>Improving performance based on access to data and experience. For example, your email is able to distinguish spam from non-spam mail based on past experience.</p>
+
+<ol start="5">
+  <li><strong>Neural Networks</strong></li>
+</ol>
+
+<p>A program structure inspired by the human brain that is able to perform tasks effectively.</p>
+
+<ol start="6">
+  <li><strong>Language</strong></li>
+</ol>
+
+<p>Processing natural language, which is produced and understood by humans.</p>
+
+<a data-id="" id="search" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#search">Search</a></h2>
+
+<p>Search problems involve an agent that is given an initial state and a goal state, and it returns a solution of how to get from the former to the latter. A navigator app uses a typical search process, where the agent (the thinking part of the program) receives as input your current location and your desired destination, and, based on a search algorithm, returns a suggested path. However, there are many other forms of search problems, like puzzles or mazes.</p>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/15puzzle.png" alt="15 puzzle"></p>
+
+<p>Finding a solution to a 15 puzzle would require the use of a search algorithm.</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Agent</strong></p>
+
+    <p>An entity that perceives its environment and acts upon that environment. In a navigator app, for example, the agent would be a representation of a car that needs to decide on which actions to take to arrive at the destination.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>State</strong></p>
+
+    <p>A configuration of an agent in its environment. For example, in a <a href="https://en.wikipedia.org/wiki/15_puzzle">15 puzzle</a>, a state is any one way that all the numbers are arranged on the board.</p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p><strong>Initial State</strong></p>
+
+        <p>The state from which the search algorithm starts. In a navigator app, that would be the current location.</p>
+      </li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Actions</strong></p>
+
+    <p>Choices that can be made in a state. More precisely, actions can be defined as a function. Upon receiving state <code class="language-plaintext highlighter-rouge">s</code> as input, <code class="language-plaintext highlighter-rouge">Actions(s)</code> returns as output the set of actions that can be executed in state <code class="language-plaintext highlighter-rouge">s</code>. For example, in a <em>15 puzzle</em>, the actions of a given state are the ways you can slide squares in the current configuration (4 if the empty square is in the middle, 3 if next to a side, 2 if in the corner).</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Transition Model</strong></p>
+
+    <p>A description of what state results from performing any applicable action in any state. More precisely, the transition model can be defined as a function. Upon receiving state <code class="language-plaintext highlighter-rouge">s</code> and action <code class="language-plaintext highlighter-rouge">a</code> as input, <code class="language-plaintext highlighter-rouge">Results(s, a)</code> returns the state resulting from performing action <code class="language-plaintext highlighter-rouge">a</code> in state <code class="language-plaintext highlighter-rouge">s</code>. For example, given a certain configuration of a <em>15 puzzle</em> (state <code class="language-plaintext highlighter-rouge">s</code>), moving a square in any direction (action <code class="language-plaintext highlighter-rouge">a</code>) will bring to a new configuration of the puzzle (the new state).</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>State Space</strong></p>
+
+    <p>The set of all states reachable from the initial state by any sequence of actions. For example, in a 15 puzzle, the state space consists of all the 16!/2 configurations on the board that can be reached from any initial state. The state space can be visualized as a directed graph with states, represented as nodes, and actions, represented as arrows between nodes.</p>
+  </li>
+</ul>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/statespace.png" alt="State Space"></p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Goal Test</strong></p>
+
+    <p>The condition that determines whether a given state is a goal state. For example, in a navigator app, the goal test would be whether the current location of the agent (the representation of the car) is at the destination. If it is — problem solved. If it’s not — we continue searching.</p>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Path Cost</strong></p>
+
+    <p>A numerical cost associated with a given path. For example, a navigator app does not simply bring you to your goal; it does so while minimizing the path cost, finding the fastest way possible for you to get to your goal state.</p>
+  </li>
+</ul>
+
+<a data-id="" id="solving-search-problems" style="top: 0px;"></a><h2><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#solving-search-problems">Solving Search Problems</a></h2>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p><strong>Solution</strong></p>
+
+    <p>A sequence of actions that leads from the initial state to the goal state.</p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p><strong>Optimal Solution</strong></p>
+
+        <p>A solution that has the lowest path cost among all solutions.</p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>In a search process, data is often stored in a <strong><em>node</em></strong>, a data structure that contains the following data:</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>A <em>state</em></li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Its <em>parent node</em>, through which the current node was generated</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>The <em>action</em> that was applied to the state of the parent to get to the current node</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>The <em>path cost</em> from the initial state to this node</li>
+</ul>
+
+<p><em>Nodes</em> contain information that makes them very useful for the purposes of search algorithms. They contain a <em>state</em>, which can be checked using the <em>goal test</em> to see if it is the final state. If it is, the node’s <em>path cost</em> can be compared to other nodes’ <em>path costs</em>, which allows choosing the <em>optimal solution</em>. Once the node is chosen, by virtue of storing the <em>parent node</em> and the <em>action</em> that led from the <em>parent</em> to the current node, it is possible to trace back every step of the way from the <em>initial state</em> to this node, and this sequence of actions is the <em>solution</em>.</p>
+
+<p>However, <em>nodes</em> are simply a data structure — they don’t search, they hold information. To actually search, we use the <strong>frontier</strong>, the mechanism that “manages” the <em>nodes</em>. The <em>frontier</em> starts by containing an initial state and an empty set of explored items, and then repeats the following actions until a solution is reached:</p>
+
+<p>Repeat:</p>
+
+<ol>
+  <li>
+    <p>If the frontier is empty,</p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Stop.</em> There is no solution to the problem.</li>
+    </ul>
+  </li>
+  <li>
+    <p>Remove a node from the frontier. This is the node that will be considered.</p>
+  </li>
+  <li>
+    <p>If the node contains the goal state,</p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Return the solution. <em>Stop</em>.</li>
+    </ul>
+
+    <p>Else,</p>
+
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* Expand the node (find all the new nodes that could be reached from this node), and add resulting nodes to the frontier.
+* Add the current node to the explored set.
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<a data-id="" id="depth-first-search" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#depth-first-search">Depth-First Search</a></h4>
+
+<p>In the previous description of the <em>frontier</em>, one thing went unmentioned. At stage 2 in the pseudocode above, which node should be removed? This choice has implications on the quality of the solution and how fast it is achieved. There are multiple ways to go about the question of which nodes should be considered first, two of which can be represented by the data structures of <strong>stack</strong> (in <em>depth-first</em> search) and <strong>queue</strong> (in <em>breadth-first search</em>; and <a href="https://www.youtube.com/watch?v=2wM6_PuBIxY">here is a cute cartoon demonstration</a> of the difference between the two).</p>
+
+<p>We start with the <em>depth-first</em> search (<em>DFS</em>) approach.</p>
+
+<p>A <em>depth-first</em> search algorithm exhausts each one direction before trying another direction. In these cases, the frontier is managed as a <em>stack</em> data structure. The catchphrase you need to remember here is “<em>last-in first-out</em>.” After nodes are being added to the frontier, the first node to remove and consider is the last one to be added. This results in a search algorithm that goes as deep as possible in the first direction that gets in its way while leaving all other directions for later.</p>
+
+<p>(An example from outside lecture: Take a situation where you are looking for your keys. In a <em>depth-first</em> search approach, if you choose to start with searching in your pants, you’d first go through every single pocket, emptying each pocket and going through the contents carefully. You will stop searching in your pants and start searching elsewhere only once you will have completely exhausted the search in every single pocket of your pants.)</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Pros:
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>At best, this algorithm is the fastest. If it “lucks out” and always chooses the right path to the solution (by chance), then <em>depth-first</em> search takes the least possible time to get to a solution.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Cons:
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>It is possible that the found solution is not optimal.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>At worst, this algorithm will explore every possible path before finding the solution, thus taking the longest possible time before reaching the solution.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Code example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># Define the function that removes a node from the frontier and returns it.
+</span>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    	  <span class="c1"># Terminate the search if the frontier is empty, because this means that there is no solution.
+</span>        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">empty frontier</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+        	  <span class="c1"># Save the last item in the list (which is the newest node added)
+</span>            <span class="n">node</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frontier</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Save all the items on the list besides the last node (i.e. removing the last node)
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">frontier</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frontier</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">node</span>
+</code></pre></div></div>
+
+<a data-id="" id="breadth-first-search" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#breadth-first-search">Breadth-First Search</a></h4>
+
+<p>The opposite of <em>depth-first</em> search would be <em>breadth-first</em> search (<em>BFS</em>).</p>
+
+<p>A <em>breadth-first</em> search algorithm will follow multiple directions at the same time, taking one step in each possible direction before taking the second step in each direction. In this case, the frontier is managed as a <em>queue</em> data structure. The catchphrase you need to remember here is “<em>first-in first-out</em>.” In this case, all the new nodes add up in line, and nodes are being considered based on which one was added first (first come first served!). This results in a search algorithm that takes one step in each possible direction before taking a second step in any one direction.</p>
+
+<p>(An example from outside lecture: suppose you are in a situation where you are looking for your keys. In this case, if you start with your pants, you will look in your right pocket. After this, instead of looking at your left pocket, you will take a look in one drawer. Then on the table. And so on, in every location you can think of. Only after you will have exhausted all the locations will you go back to your pants and search in the next pocket.)</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Pros:
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>This algorithm is guaranteed to find the optimal solution.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>Cons:
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>This algorithm is almost guaranteed to take longer than the minimal time to run.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>At worst, this algorithm takes the longest possible time to run.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Code example:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="c1"># Define the function that removes a node from the frontier and returns it.
+</span>    <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="n">self</span><span class="p">):</span>
+    	  <span class="c1"># Terminate the search if the frontier is empty, because this means that there is no solution.
+</span>        <span class="k">if</span> <span class="n">self</span><span class="p">.</span><span class="nf">empty</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="nc">Exception</span><span class="p">(</span><span class="sh">"</span><span class="s">empty frontier</span><span class="sh">"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Save the oldest item on the list (which was the first one to be added)
+</span>            <span class="n">node</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frontier</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Save all the items on the list besides the first one (i.e. removing the first node)
+</span>            <span class="n">self</span><span class="p">.</span><span class="n">frontier</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">frontier</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">return</span> <span class="n">node</span>
+</code></pre></div></div>
+
+<a data-id="" id="greedy-best-first-search" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#greedy-best-first-search">Greedy Best-First Search</a></h4>
+
+<p>Breadth-first and depth-first are both <strong>uninformed</strong> search algorithms. That is, these algorithms do not utilize any knowledge about the problem that they did not acquire through their own exploration. However, most often is the case that some knowledge about the problem is, in fact, available. For example, when a human maze-solver enters a junction, the human can see which way goes in the general direction of the solution and which way does not. AI can do the same. A type of algorithm that considers additional knowledge to try to improve its performance is called an <strong>informed</strong> search algorithm.</p>
+
+<p><strong>Greedy best-first</strong> search expands the node that is the closest to the goal, as determined by a <strong>heuristic function</strong> <em>h(n)</em>. As its name suggests, the function estimates how close to the goal the next node is, but it can be mistaken. The efficiency of the <em>greedy best-first</em> algorithm depends on how good the heuristic function is. For example, in a maze, an algorithm can use a heuristic function that relies on the <strong>Manhattan distance</strong> between the possible nodes and the end of the maze. The <em>Manhattan distance</em> ignores walls and counts how many steps up, down, or to the sides it would take to get from one location to the goal location. This is an easy estimation that can be derived based on the (x, y) coordinates of the current location and the goal location.</p>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/manhattandistance.png" alt="Manhattan Distance"></p>
+
+<p>Manhattan Distance</p>
+
+<p>However, it is important to emphasize that, as with any heuristic, it can go wrong and lead the algorithm down a slower path than it would have gone otherwise. It is possible that an <em>uninformed</em> search algorithm will provide a better solution faster, but it is less likely to do so than an <em>informed</em> algorithm.</p>
+
+<a data-id="" id="a-search" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#a-search">A* Search</a></h4>
+
+<p>A development of the <em>greedy best-first</em> algorithm, <em>A* search</em> considers not only <em>h(n)</em>, the estimated cost from the current location to the goal, but also <em>g(n)</em>, the cost that was accrued until the current location. By combining both these values, the algorithm has a more accurate way of determining the cost of the solution and optimizing its choices on the go. The algorithm keeps track of  (<em>cost of path until now</em> + <em>estimated cost to the goal</em>), and once it exceeds the estimated cost of some previous option, the algorithm will ditch the current path and go back to the previous option, thus preventing itself from going down a long, inefficient path that <em>h(n)</em> erroneously marked as best.</p>
+
+<p>Yet again, since this algorithm, too, relies on a heuristic, it is as good as the heuristic that it employs. It is possible that in some situations it will be less efficient than <em>greedy best-first</em> search or even the <em>uninformed</em> algorithms. For <em>A* search</em> to be optimal, the heuristic function, <em>h(n)</em>, should be:</p>
+
+<ol>
+  <li><em>Admissible</em>, or never <em>overestimating</em> the true cost, and</li>
+  <li><em>Consistent</em>, which means that the estimated path cost to the goal of a new node in addition to the cost of transitioning to it from the previous node is greater or equal to the estimated path cost to the goal of the previous node. To put it in an equation form, <em>h(n)</em> is consistent if for every node <em>n</em> and successor node <em>n’</em> with step cost <em>c</em>, <em>h(n) ≤ h(n’) + c</em>.</li>
+</ol>
+
+<a data-id="" id="adversarial-search" style="top: 0px;"></a><h3><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#adversarial-search">Adversarial Search</a></h3>
+
+<p>Whereas, previously, we have discussed algorithms that need to find an answer to a question, in <strong>adversarial search</strong> the algorithm faces an opponent that tries to achieve the opposite goal. Often, AI that uses adversarial search is encountered in games, such as tic tac toe.</p>
+
+<a data-id="" id="minimax" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#minimax">Minimax</a></h4>
+
+<p>A type of algorithm in adversarial search, <strong>Minimax</strong> represents winning conditions as (-1) for one side and (+1) for the other side. Further actions will be driven by these conditions, with the minimizing side trying to get the lowest score, and the maximizer trying to get the highest score.</p>
+
+<p><strong>Representing a Tic-Tac-Toe AI</strong>:</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>S₀</em>: Initial state (in our case, an empty 3X3 board)</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Players(s)</em>: a function that, given a state <em>s</em>, returns which player’s turn it is (X or O).</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Actions(s)</em>: a function that, given a state <em>s</em>, return all the legal moves in this state (what spots are free on the board).</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Result(s, a)</em>: a function that, given a state <em>s</em> and action <em>a</em>, returns a new state. This is the board that resulted from performing the action <em>a</em> on state <em>s</em> (making a move in the game).</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Terminal(s)</em>: a function that, given a state <em>s</em>, checks whether this is the last step in the game, i.e. if someone won or there is a tie. Returns <em>True</em> if the game has ended, <em>False</em> otherwise.</li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span><em>Utility(s)</em>: a function that, given a terminal state <em>s</em>, returns the utility value of the state: -1, 0, or 1.</li>
+</ul>
+
+<p><strong>How the algorithm works</strong>:</p>
+
+<p>Recursively, the algorithm simulates all possible games that can take place beginning at the current state and until a terminal state is reached. Each terminal state is valued as either (-1), 0, or (+1).</p>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/minimax_tictactoe.png" alt="Minimax in Tic Tac Toe"></p>
+
+<p>Minimax Algorithm in Tic Tac Toe</p>
+
+<p>Knowing based on the state whose turn it is, the algorithm can know whether the current player, when playing optimally, will pick the action that leads to a state with a lower or a higher value. This way, alternating between minimizing and maximizing, the algorithm creates values for the state that would result from each possible action. To give a more concrete example, we can imagine that the maximizing player asks at every turn: “if I take this action, a new state will result. If the minimizing player plays optimally, what action can that player take to bring to the lowest value?” However, to answer this question, the maximizing player has to ask: “To know what the minimizing player will do, I need to simulate the same process in the minimizer’s mind: the minimizing player will try to ask: ‘if I take this action, what action can the maximizing player take to bring to the highest value?’” This is a recursive process, and it could be hard to wrap your head around it; looking at the pseudo code below can help. Eventually, through this recursive reasoning process, the maximizing player generates values for each state that could result from all the possible actions at the current state. After having these values, the maximizing player chooses the highest one.</p>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/minimax_theoretical.png" alt="Minimax Algorithm"></p>
+
+<p>The Maximizer Considers the Possible Values of Future States.</p>
+
+<p>To put it in pseudocode, the Minimax algorithm works the following way:</p>
+
+<ul class="fa-ul">
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Given a state <em>s</em></p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>The maximizing player picks action <em>a</em> in <em>Actions(s)</em> that produces the highest value of <em>Min-Value(Result(s, a))</em>.</li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>The minimizing player picks action  <em>a</em> in <em>Actions(s)</em> that produces the lowest value of <em>Max-Value(Result(s, a))</em>.</li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Function <em>Max-Value(state)</em></p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p><em>v = -∞</em></p>
+      </li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p>if <em>Terminal(state)</em>:</p>
+
+        <p>​	return <em>Utility(state)</em></p>
+      </li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p>for <em>action</em> in <em>Actions(state)</em>:</p>
+
+        <p>​  <em>v = Max(v, Min-Value(Result(state, action)))</em></p>
+
+        <p>return <em>v</em></p>
+      </li>
+    </ul>
+  </li>
+  <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+    <p>Function <em>Min-Value(state)</em>:</p>
+
+    <ul class="fa-ul">
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p><em>v = ∞</em></p>
+      </li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p>if <em>Terminal(state)</em>:</p>
+
+        <p>​	return <em>Utility(state)</em></p>
+      </li>
+      <li data-marker="*"><span class="fa-li"><i class="fas fa-square"></i></span>
+        <p>for <em>action</em> in <em>Actions(state)</em>:</p>
+
+        <p>​	<em>v = Min(v, Max-Value(Result(state, action)))</em></p>
+
+        <p>return <em>v</em></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<a data-id="" id="alpha-beta-pruning" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#alpha-beta-pruning">Alpha-Beta Pruning</a></h4>
+
+<p>A way to optimize <em>Minimax</em>, <strong>Alpha-Beta Pruning</strong> skips some of the recursive computations that are decidedly unfavorable. After establishing the value of one action, if there is initial evidence that the following action can bring the opponent to get to a better score than the already established action, there is no need to further investigate this action because it will decidedly be less favorable than the previously established one.</p>
+
+<p>This is most easily shown with an example: a maximizing player knows that, at the next step, the minimizing player will try to achieve the lowest score. Suppose the maximizing player has three possible actions, and the first one is valued at 4. Then the player starts generating the value for the next action. To do this, the player generates the values of the minimizer’s actions if the current player makes this action, knowing that the minimizer will choose the lowest one. However, before finishing the computation for all the possible actions of the minimizer, the player sees that one of the options has a value of three. This means that there is no reason to keep on exploring the other possible actions for the minimizing player. The value of the not-yet-valued action doesn’t matter, be it 10 or (-10). If the value is 10, the minimizer will choose the lowest option, 3, which is already worse than the preestablished 4. If the not-yet-valued action would turn out to be (-10), the minimizer will this option, (-10), which is even more unfavorable to the maximizer. Therefore, computing additional possible actions for the minimizer at this point is irrelevant to the maximizer, because the maximizing player already has an unequivocally better choice whose value is 4.</p>
+
+<p><img src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/alphabeta.png" alt="Alpha Beta Pruning"></p>
+
+<a data-id="" id="depth-limited-minimax" style="top: 0px;"></a><h4><a data-id="" href="https://cs50.harvard.edu/ai/notes/0/#depth-limited-minimax">Depth-Limited Minimax</a></h4>
+
+<p>There is a total of 255,168 possible Tic Tac Toe games, and 10²⁹⁰⁰⁰ possible games in Chess. The minimax algorithm, as presented so far, requires generating all hypothetical games from a certain point to the terminal condition. While computing all the Tic-Tac-Toe games doesn’t pose a challenge for a modern computer, doing so with chess is currently impossible.</p>
+
+<p><strong>Depth-limited Minimax</strong> considers only a pre-defined number of moves before it stops, without ever getting to a terminal state. However, this doesn’t allow for getting a precise value for each action, since the end of the hypothetical games has not been reached. To deal with this problem, <em>Depth-limited Minimax</em> relies on an <strong>evaluation function</strong> that estimates the expected utility of the game from a given state, or, in other words, assigns values to states. For example, in a chess game, a utility function would take as input a current configuration of the board, try to assess its expected utility (based on what pieces each player has and their locations on the board), and then return a positive or a negative value that represents how favorable the board is for one player versus the other. These values can be used to decide on the right action, and the better the evaluation function, the better the Minimax algorithm that relies on it.</p>
+
+
+                </main>
+
+            </div>
+
+        </div>
+
+        
+ 
+        <script src="./Lecture 0 - CS50&#39;s Introduction to Artificial Intelligence with Python_files/page.js"></script>
+
+    
+
+
+</body></html>

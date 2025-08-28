@@ -1,6 +1,7 @@
 import csv
 import sys
-from util import Node, StackFrontier, QueueFrontier
+
+from util import Node, QueueFrontier
 
 # Maps names to a set of corresponding person_ids
 names = {}
@@ -23,7 +24,7 @@ def load_data(directory):
             people[row["id"]] = {
                 "name": row["name"],
                 "birth": row["birth"],
-                "movies": set()
+                "movies": set(),
             }
             if row["name"].lower() not in names:
                 names[row["name"].lower()] = {row["id"]}
@@ -37,7 +38,7 @@ def load_data(directory):
             movies[row["id"]] = {
                 "title": row["title"],
                 "year": row["year"],
-                "stars": set()
+                "stars": set(),
             }
 
     # Load stars
@@ -91,23 +92,26 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
     # TODO
-    #path列表
+    # path列表
     path = []
-    #queue队列
+    # 长度为0时，说明source和target是同一个人
+    if source == target:
+        return path
+    # queue队列
     frontier = QueueFrontier()
-    #被探索过的id集合
+    # 被探索过的id集合
     explored = set()
-    #将初始点加到队列中
+    # 将初始点加到队列中
     start_node = Node(source, None, None)
     frontier.add(start_node)
-    #whiletrue
+    # whiletrue
     while True:
         # 如果队列为空，返回none
         if frontier.empty():
             return None
         # 弹出队头
         cur_node = frontier.remove()
-        #终点时，返回最终的end_node
+        # 终点时，返回最终的end_node
         # if cur_node.state == target:
         #     end_node = cur_node
         #     while end_node.parent is not None:
@@ -126,7 +130,7 @@ def shortest_path(source, target):
             for neighbor in neighbors:
                 movie_id = neighbor[0]
                 person_id = neighbor[1]
-                #邻居当中有终点
+                # 邻居当中有终点
                 if person_id == target:
                     end_node = Node(person_id, cur_node, movie_id)
                     while end_node.parent is not None:
@@ -135,7 +139,7 @@ def shortest_path(source, target):
                     path.reverse()
                     return path
 
-                #已经在队列里面的和被探索过的都不再加了
+                # 已经在队列里面的和被探索过的都不再加了
                 if frontier.contains_state(person_id) or person_id in explored:
                     continue
                 # 如果都不是的话，把这个点加到frontier里面

@@ -59,7 +59,9 @@ def result(board, action):
     now_player = player(board)
     i = action[0]
     j = action[1]
-    if new_board[i][j] != EMPTY:
+    if i < 0 or j < 0 or i >= 3 or j >= 3:
+        raise ValueError("Invalid action")
+    elif new_board[i][j] != EMPTY:
         raise ValueError
     else:
         new_board[i][j] = now_player

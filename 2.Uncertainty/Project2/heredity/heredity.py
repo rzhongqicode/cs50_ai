@@ -2,6 +2,8 @@ import csv
 import itertools
 import sys
 
+# from sympy.strategies.core import switch
+
 PROBS = {
 
     # Unconditional probabilities for having gene
@@ -35,6 +37,20 @@ PROBS = {
     # Mutation probability
     "mutation": 0.01
 }
+
+pass_gene = [PROBS["mutation"], 0.5, 1 - PROBS["mutation"]]
+
+# def pass_gene(num_genes):
+#     """
+#         input: number of genes
+#         output: probability of gene pass
+#     """
+#     if num_genes == 0:
+#         return PROBS["mutation"]
+#     elif num_genes == 1:
+#         return 0.5
+#     else:
+#         return 1 - PROBS["mutation"]
 
 
 def main():
@@ -139,7 +155,49 @@ def joint_probability(people, one_gene, two_genes, have_trait):
         * everyone in set `have_trait` has the trait, and
         * everyone not in set` have_trait` does not have the trait.
     """
-    raise NotImplementedError
+    probability = 1
+    for cur_person in people:
+
+        num_genes = 0
+        if cur_person in one_gene:
+            num_genes = 1
+        elif cur_person in two_genes:
+            num_genes = 2
+
+        has_trait = cur_person in have_trait
+
+        # mother is None
+        if not people[cur_person]["mother"]:
+            #check how many gene does cur_person have, and check if cur_person exhibit trait
+            probability *= PROBS["gene"][num_genes] * PROBS["trait"][num_genes][has_trait]
+
+        # mother is not None
+        else:
+            mother = people[cur_person]["mother"]
+            father = people[cur_person]["father"]
+
+            mother_gene_num = 0
+            if mother in one_gene:
+                mother_gene_num = 1
+            elif mother in two_genes:
+                mother_gene_num = 2
+            father_gene_num = 0
+            if father in one_gene:
+                father_gene_num = 1
+            elif father in two_genes:
+                father_gene_num = 2
+
+            if num_genes == 0:
+                probability *= (1 - pass_gene[mother_gene_num]) * (1 - pass_gene[father_gene_num]) * PROBS["trait"][num_genes][has_trait]
+            elif num_genes == 1:
+                probability *= ((1 - pass_gene[mother_gene_num]) * pass_gene[father_gene_num]
+                                + (1 - pass_gene[father_gene_num]) * pass_gene[mother_gene_num]) * PROBS["trait"][num_genes][has_trait]
+            else:
+                probability *= pass_gene[mother_gene_num] * pass_gene[father_gene_num] * PROBS["trait"][num_genes][has_trait]
+
+    return probability
+
+    # raise NotImplementedError
 
 
 def update(probabilities, one_gene, two_genes, have_trait, p):
@@ -149,7 +207,20 @@ def update(probabilities, one_gene, two_genes, have_trait, p):
     Which value for each distribution is updated depends on whether
     the person is in `have_gene` and `have_trait`, respectively.
     """
-    raise NotImplementedError
+    for person in probabilities:
+
+        num_genes = 0
+        if person in one_gene:
+            num_genes = 1
+        elif person in two_genes:
+            num_genes = 2
+
+        has_trait = person in have_trait
+
+        probabilities[person]["gene"][num_genes] += p
+        probabilities[person]["trait"][has_trait] += p
+
+    # raise NotImplementedError
 
 
 def normalize(probabilities):
@@ -157,7 +228,17 @@ def normalize(probabilities):
     Update `probabilities` such that each probability distribution
     is normalized (i.e., sums to 1, with relative proportions the same).
     """
-    raise NotImplementedError
+    for person in probabilities:
+
+        sum_genes = sum(probabilities[person]["gene"].values())
+        for gene in probabilities[person]["gene"]:
+            probabilities[person]["gene"][gene] /= sum_genes
+
+        sum_traits = sum(probabilities[person]["trait"].values())
+        for trait in probabilities[person]["trait"]:
+            probabilities[person]["trait"][trait] /= sum_traits
+
+    # raise NotImplementedError
 
 
 if __name__ == "__main__":
